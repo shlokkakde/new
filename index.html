@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════
+           BASE
+        ══════════════════════════════════════ */
+        :root {
+          --bg:      #ffffff;
+          --fg:      #1a1a1a;
+          --muted:   #444444;
+          --faint:   #888888;
+          --link:    #c0392b;     /* nadh.in orange-red */
+          --border:  #e8e8e8;
+          --subtle:  #f8f8f8;
+          /* admin */
+          --adm-bg:      #0f1117;
+          --adm-surface: #1a1d27;
+          --adm-surface2:#242736;
+          --adm-border:  #2e3247;
+          --adm-muted:   #6b7280;
+          --adm-fg:      #e2e5f0;
+          --adm-green:   #22c55e;
+          --adm-red:     #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+          background: var(--bg);
+          color: var(--fg);
+          font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+          font-size: 19px;
+          line-height: 1.75;
+          min-height: 100vh;
+        }
+
+        /* ══════════════════════════════════════
+           LAYOUT  — wider, like nadh.in
+        ══════════════════════════════════════ */
+        .wrap {
+          max-width: 860px;
+          margin: 0 auto;
+          padding: 0 32px;
+        }
+
+        /* ══════════════════════════════════════
+           HEADER — name left, nav right
+        ══════════════════════════════════════ */
+        #site-header {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          padding: 40px 0 28px;
+          border-bottom: 1px solid var(--border);
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+        .site-name {
+          font-family: 'EB Garamond', Georgia, serif;
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--fg);
+          text-decoration: none;
+          letter-spacing: -0.01em;
+          line-height: 1;
+          flex-shrink: 0;
+        }
+        .site-name:hover { color: var(--link); }
+        .site-nav {
+          display: flex;
+          gap: 28px;
+          align-items: baseline;
+          flex-wrap: wrap;
+        }
+        .site-nav a {
+          font-family: 'EB Garamond', Georgia, serif;
+          font-size: 1.15rem;
+          color: var(--link);
+          text-decoration: none;
+          transition: opacity 0.15s;
+        }
+        .site-nav a:hover  { opacity: 0.7; }
+        .site-nav a.active { text-decoration: underline; text-underline-offset: 3px; }
+
+        /* ══════════════════════════════════════
+           PAGES
+        ══════════════════════════════════════ */
+        .page { display: none; padding: 48px 0 96px; }
+        .page.active { display: block; animation: fadeIn 0.18s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ══════════════════════════════════════
+           HOME PAGE
+        ══════════════════════════════════════ */
+        .home-tagline {
+          font-family: 'EB Garamond', Georgia, serif;
+          font-size: 2.1rem;
+          font-style: italic;
+          font-weight: 400;
+          color: var(--fg);
+          margin-bottom: 40px;
+          line-height: 1.3;
+        }
+
+        /* Two-column: text left, photo right */
+        .home-body {
+          display: grid;
+          grid-template-columns: 1fr 220px;
+          gap: 48px;
+          align-items: start;
+        }
+        .home-text p {
+          margin-bottom: 1.1em;
+          color: var(--fg);
+          font-size: 1rem;
+        }
+        .home-text p:last-child { margin-bottom: 0; }
+        .home-text a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+        .home-text em { font-style: italic; }
+        .home-text strong { font-weight: 600; }
+
+        /* circular photo */
+        .home-photo-wrap {
+          display: flex;
+          justify-content: center;
+          padding-top: 4px;
+        }
+        .home-photo {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          object-fit: cover;
+          object-position: center top;
+          display: block;
+          filter: grayscale(100%);
+          background: #ddd;
+        }
+        .home-photo-placeholder {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          background: #ebebeb;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          color: #aaa;
+          font-size: 0.72rem;
+          font-family: 'JetBrains Mono', monospace;
+          text-align: center;
+          cursor: pointer;
+          border: 2px dashed #d0d0d0;
+          transition: border-color 0.2s, color 0.2s;
+        }
+        .home-photo-placeholder:hover { border-color: var(--link); color: var(--link); }
+        .home-photo-placeholder .ph-icon { font-size: 2rem; line-height: 1; }
+
+        /* links row below bio */
+        .home-links {
+          margin-top: 36px;
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+        .home-links a {
+          font-size: 0.95rem;
+          color: var(--link);
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+        .home-links a:hover { opacity: 0.7; }
+
+        /* home blog preview */
+        .home-posts-section { margin-top: 56px; }
+        .home-posts-title {
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--fg);
+          margin-bottom: 16px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid var(--border);
+        }
+        .home-post-row {
+          display: flex;
+          gap: 20px;
+          padding: 8px 0;
+          border-bottom: 1px solid var(--border);
+          align-items: baseline;
+        }
+        .home-post-date { font-size: 0.82rem; color: var(--faint); font-family: 'JetBrains Mono', monospace; min-width: 80px; white-space: nowrap; }
+        .home-post-link { font-size: 0.97rem; color: var(--link); text-decoration: none; }
+        .home-post-link:hover { text-decoration: underline; }
+
+        /* ══════════════════════════════════════
+           PAGE TITLE
+        ══════════════════════════════════════ */
+        .page-title {
+          font-size: 1.75rem;
+          font-style: italic;
+          font-weight: 400;
+          color: var(--fg);
+          margin-bottom: 36px;
+        }
+
+        /* ══════════════════════════════════════
+           PROJECTS
+        ══════════════════════════════════════ */
+        .project-row {
+          display: grid;
+          grid-template-columns: 200px 1fr auto;
+          gap: 8px 20px;
+          padding: 12px 0;
+          border-bottom: 1px solid var(--border);
+          align-items: baseline;
+        }
+        .project-row:first-of-type { border-top: 1px solid var(--border); }
+        .project-name {
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: var(--link);
+          text-decoration: none;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.82rem;
+        }
+        .project-name:hover { text-decoration: underline; }
+        .project-desc { font-size: 0.95rem; color: var(--muted); }
+        .project-tags { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+        .ptag {
+          font-size: 0.6rem;
+          color: var(--faint);
+          border: 1px solid var(--border);
+          padding: 1px 6px;
+          border-radius: 2px;
+          font-family: 'JetBrains Mono', monospace;
+          white-space: nowrap;
+        }
+
+        /* ══════════════════════════════════════
+           EXPERIENCE
+        ══════════════════════════════════════ */
+        .exp-item { padding: 18px 0; border-bottom: 1px solid var(--border); }
+        .exp-item:first-of-type { border-top: 1px solid var(--border); }
+        .exp-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 3px; }
+        .exp-role { font-size: 1rem; font-weight: 500; }
+        .exp-period { font-size: 0.76rem; color: var(--faint); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .exp-company { font-size: 0.88rem; color: var(--link); margin-bottom: 6px; }
+        .exp-desc { font-size: 0.93rem; color: var(--muted); }
+
+        /* ══════════════════════════════════════
+           BLOG LIST
+        ══════════════════════════════════════ */
+        .post-row {
+          display: flex;
+          gap: 24px;
+          padding: 10px 0;
+          border-bottom: 1px solid var(--border);
+          align-items: baseline;
+        }
+        .post-row:first-of-type { border-top: 1px solid var(--border); }
+        .post-date { font-size: 0.78rem; color: var(--faint); font-family: 'JetBrains Mono', monospace; white-space: nowrap; min-width: 86px; }
+        .post-link { font-size: 1rem; color: var(--link); text-decoration: none; }
+        .post-link:hover { text-decoration: underline; }
+
+        /* ══════════════════════════════════════
+           BLOG POST
+        ══════════════════════════════════════ */
+        .post-back { font-size: 0.88rem; color: var(--link); text-decoration: none; display: inline-block; margin-bottom: 28px; }
+        .post-back:hover { text-decoration: underline; }
+        .post-page-date { font-size: 0.8rem; color: var(--faint); font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; }
+        .post-page-title { font-size: 1.9rem; font-weight: 500; line-height: 1.3; color: var(--fg); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .post-content { font-size: 1rem; line-height: 1.85; }
+        .post-content p { margin-bottom: 1.3em; }
+        .post-content h2 { font-size: 1.3rem; font-weight: 500; font-style: italic; margin: 2em 0 0.6em; }
+        .post-content code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; background: var(--subtle); border: 1px solid var(--border); padding: 1px 5px; border-radius: 2px; }
+        .post-content pre { background: var(--subtle); border: 1px solid var(--border); padding: 16px 20px; border-radius: 3px; overflow-x: auto; margin: 1.3em 0; line-height: 1.6; }
+        .post-content pre code { background: none; border: none; padding: 0; font-size: 0.78rem; }
+        .post-content blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--muted); font-style: italic; margin: 1.3em 0; }
+        .post-content a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+        .post-content ul, .post-content ol { padding-left: 1.6em; margin-bottom: 1.2em; }
+        .post-content li { margin-bottom: 0.3em; }
+
+        /* ══════════════════════════════════════
+           FOOTER
+        ══════════════════════════════════════ */
+        #site-footer {
+          border-top: 1px solid var(--border);
+          padding: 22px 0 40px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .footer-copy { font-size: 0.82rem; color: var(--faint); font-family: 'EB Garamond', serif; }
+        .admin-trigger { font-size: 0.72rem; color: transparent; background: none; border: none; cursor: default; transition: color 0.3s; font-family: 'JetBrains Mono', monospace; }
+        .admin-trigger:hover { color: var(--faint); cursor: pointer; }
+
+        /* ══════════════════════════════════════
+           STATE MESSAGES
+        ══════════════════════════════════════ */
+        .pg-loading { color: var(--faint); font-size: 0.85rem; padding: 12px 0; font-family: 'JetBrains Mono', monospace; }
+        .pg-empty   { color: var(--faint); font-size: 0.97rem; padding: 12px 0; font-style: italic; }
+        .pg-error   { color: var(--adm-red); font-size: 0.82rem; padding: 12px 0; font-family: 'JetBrains Mono', monospace; }
+
+        /* ══════════════════════════════════════
+           ADMIN OVERLAY
+        ══════════════════════════════════════ */
+        .admin-overlay { display: none; position: fixed; inset: 0; background: var(--adm-bg); z-index: 500; overflow: hidden; font-family: 'JetBrains Mono', monospace; color: var(--adm-fg); }
+        .admin-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+        .admin-login { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 20px; padding: 40px; }
+        .login-box { background: var(--adm-surface); border: 1px solid var(--adm-border); border-radius: 8px; padding: 28px; width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 14px; }
+        .login-box input { background: var(--adm-bg); border: 1px solid var(--adm-border); color: var(--adm-fg); padding: 9px 13px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; outline: none; transition: border-color 0.2s; width: 100%; }
+        .login-box input:focus { border-color: #5b8af5; }
+        .login-hint { font-size: 0.65rem; color: var(--adm-muted); text-align: center; }
+        .login-error { color: var(--adm-red); font-size: 0.7rem; text-align: center; min-height: 15px; }
+        .admin-layout { display: flex; width: 100%; height: 100%; }
+        .admin-sidebar { width: 210px; min-width: 210px; background: var(--adm-surface); border-right: 1px solid var(--adm-border); display: flex; flex-direction: column; padding: 22px 0; }
+        .sidebar-logo { padding: 0 18px 20px; border-bottom: 1px solid var(--adm-border); margin-bottom: 14px; }
+        .sl-label { font-size: 0.62rem; color: var(--adm-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+        .sl-name  { font-size: 0.82rem; color: var(--adm-fg); margin-top: 2px; }
+        .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 0 10px; }
+        .sbtn { background: none; border: none; color: var(--adm-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.03em; text-align: left; padding: 8px 10px; border-radius: 4px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 9px; }
+        .sbtn:hover { background: var(--adm-surface2); color: var(--adm-fg); }
+        .sbtn.active { background: var(--adm-surface2); color: var(--adm-fg); }
+        .sbtn .ico { width: 14px; text-align: center; font-size: 0.8rem; }
+        .sidebar-foot { padding: 14px 10px 0; border-top: 1px solid var(--adm-border); margin-top: 14px; }
+        .admin-main { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
+        .admin-topbar { padding: 18px 28px; border-bottom: 1px solid var(--adm-border); display: flex; justify-content: space-between; align-items: center; background: var(--adm-surface); position: sticky; top: 0; z-index: 10; }
+        .admin-topbar h1 { font-size: 0.8rem; letter-spacing: 0.07em; text-transform: uppercase; }
+        .db-status { font-size: 0.65rem; display: flex; align-items: center; gap: 6px; }
+        .db-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--adm-muted); }
+        .db-dot.ok { background: var(--adm-green); }
+        .db-dot.err { background: var(--adm-red); }
+        .admin-body { padding: 28px; flex: 1; }
+        .apanel { display: none; }
+        .apanel.active { display: block; animation: fadeIn 0.2s ease; }
+        .sec-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+        .sec-label { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--adm-muted); }
+        .items-list { display: flex; flex-direction: column; margin-bottom: 20px; }
+        .icard { background: var(--adm-surface); border: 1px solid var(--adm-border); border-radius: 5px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 7px; transition: border-color 0.15s; }
+        .icard:hover { border-color: #5b8af5; }
+        .icard-info { flex: 1; min-width: 0; }
+        .icard-title { font-size: 0.78rem; color: var(--adm-fg); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .icard-sub { font-size: 0.66rem; color: var(--adm-muted); margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .icard-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+        .icard-tag { font-size: 0.6rem; background: var(--adm-surface2); border: 1px solid var(--adm-border); padding: 1px 7px; border-radius: 2px; color: var(--adm-muted); }
+        .icard-actions { display: flex; gap: 7px; flex-shrink: 0; }
+        .btn { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 7px 13px; border-radius: 4px; border: 1px solid; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 5px; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-primary { background: #c0392b; border-color: #c0392b; color: #fff; }
+        .btn-primary:hover:not(:disabled) { background: #a93226; }
+        .btn-ghost { background: transparent; border-color: var(--adm-border); color: var(--adm-muted); }
+        .btn-ghost:hover:not(:disabled) { border-color: var(--adm-fg); color: var(--adm-fg); }
+        .btn-danger { background: transparent; border-color: var(--adm-border); color: var(--adm-red); }
+        .btn-danger:hover:not(:disabled) { border-color: var(--adm-red); background: rgba(239,68,68,.07); }
+        .btn-sm { padding: 4px 9px; font-size: 0.63rem; }
+        .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 600; }
+        .drawer-overlay.open { display: flex; justify-content: flex-end; animation: fadeIn 0.18s ease; }
+        .drawer { width: 500px; max-width: 100%; background: var(--adm-surface); height: 100%; overflow-y: auto; padding: 28px; display: flex; flex-direction: column; gap: 18px; animation: slideIn 0.22s ease; }
+        .drawer-hdr { display: flex; justify-content: space-between; align-items: center; }
+        .drawer-title { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+        .drawer-close { background: none; border: none; color: var(--adm-muted); font-size: 1.1rem; cursor: pointer; padding: 3px; transition: color 0.15s; }
+        .drawer-close:hover { color: var(--adm-fg); }
+        .fgrp { display: flex; flex-direction: column; gap: 7px; }
+        .flbl { font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--adm-muted); }
+        .finput, .ftarea, .fselect { background: var(--adm-bg); border: 1px solid var(--adm-border); color: var(--adm-fg); padding: 9px 13px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; outline: none; transition: border-color 0.2s; width: 100%; }
+        .finput:focus, .ftarea:focus, .fselect:focus { border-color: #5b8af5; }
+        .ftarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+        .ftarea.tall { min-height: 260px; }
+        .fhint { font-size: 0.61rem; color: var(--adm-muted); }
+        .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .dfooter { display: flex; gap: 10px; justify-content: flex-end; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--adm-border); }
+        .profile-form { display: grid; gap: 18px; max-width: 580px; }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--adm-muted); font-size: 0.72rem; }
+        .photo-upload-row { display: flex; align-items: center; gap: 16px; }
+        .photo-preview { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--adm-border); background: var(--adm-surface2); flex-shrink: 0; }
+        .photo-upload-info { font-size: 0.68rem; color: var(--adm-muted); line-height: 1.6; }
+        .toast { position: fixed; bottom: 28px; right: 28px; background: var(--adm-surface2); border: 1px solid var(--adm-border); color: var(--adm-fg); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 11px 18px; border-radius: 5px; z-index: 999; display: flex; align-items: center; gap: 9px; box-shadow: 0 6px 24px rgba(0,0,0,.4); animation: slideUp .22s ease; }
+        .toast.ok  { border-color: var(--adm-green); }
+        .toast.ok::before  { content: '✓'; color: var(--adm-green); }
+        .toast.err { border-color: var(--adm-red); }
+        .toast.err::before { content: '✕'; color: var(--adm-red); }
+        @keyframes slideIn { from { transform: translateX(36px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* ══════════════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════════════ */
+        @media(max-width: 700px) {
+          .home-body { grid-template-columns: 1fr; }
+          .home-photo-wrap { order: -1; }
+          .home-photo, .home-photo-placeholder { width: 140px; height: 140px; }
+          .project-row { grid-template-columns: 1fr; gap: 4px; }
+          .project-tags { justify-content: flex-start; }
+          #site-header { gap: 12px; }
+          .site-name { font-size: 1.6rem; }
+          .admin-sidebar { display: none; }
+          .frow { grid-template-columns: 1fr; }
+          .drawer { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+
+    <!-- ══════ HEADER ══════ -->
+    <header id="site-header">
+        <a class="site-name" href="#home" id="hdrName">Your Name</a>
+        <nav class="site-nav">
+            <a href="#home"       id="nav-home">Home</a>
+            <a href="#projects"   id="nav-projects">Projects</a>
+            <a href="#experience" id="nav-experience">Experience</a>
+            <a href="#blog"       id="nav-blog">Blog</a>
+        </nav>
+    </header>
+
+    <!-- ══════ HOME ══════ -->
+    <div class="page" id="page-home">
+        <div class="home-tagline" id="homeTagline">Developer / Tinkerer / Builder</div>
+        <div class="home-body">
+            <div>
+                <div class="home-text" id="homeAbout">
+                    <p class="pg-loading">Loading…</p>
+                </div>
+                <div class="home-links" id="homeLinks"></div>
+                <div class="home-posts-section" id="homePostsSection" style="display:none">
+                    <div class="home-posts-title">Blog posts</div>
+                    <div id="homePostsList"></div>
+                </div>
+            </div>
+            <div class="home-photo-wrap" id="photoWrap">
+                <div class="home-photo-placeholder" id="photoPlaceholder" onclick="openAdmin()">
+                    <span class="ph-icon">◎</span>
+                    <span>Add photo<br>in admin</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════ PROJECTS ══════ -->
+    <div class="page" id="page-projects">
+        <div class="page-title">Projects</div>
+        <div id="projectsContent"><p class="pg-loading">Loading…</p></div>
+    </div>
+
+    <!-- ══════ EXPERIENCE ══════ -->
+    <div class="page" id="page-experience">
+        <div class="page-title">Experience</div>
+        <div id="experienceContent"><p class="pg-loading">Loading…</p></div>
+    </div>
+
+    <!-- ══════ BLOG LIST ══════ -->
+    <div class="page" id="page-blog">
+        <div class="page-title">Blog</div>
+        <div id="blogContent"><p class="pg-loading">Loading…</p></div>
+    </div>
+
+    <!-- ══════ BLOG POST ══════ -->
+    <div class="page" id="page-post">
+        <a class="post-back" href="#blog">← Blog</a>
+        <div class="post-page-date" id="postPageDate"></div>
+        <h1 class="post-page-title" id="postPageTitle"></h1>
+        <div class="post-content" id="postPageBody"></div>
+    </div>
+
+    <!-- ══════ FOOTER ══════ -->
+    <footer id="site-footer">
+        <span class="footer-copy" id="footerCopy"></span>
+        <button class="admin-trigger" onclick="openAdmin()">⚙ admin</button>
+    </footer>
+
+</div><!-- /wrap -->
+
+<!-- ══════════════════════════════════════
+     ADMIN OVERLAY
+══════════════════════════════════════ -->
+<div class="admin-overlay" id="adminOverlay">
+
+    <!-- Login -->
+    <div class="admin-login" id="adminLogin">
+        <div style="font-size:0.68rem;color:var(--adm-muted);letter-spacing:.1em;text-transform:uppercase">Portfolio Admin</div>
+        <div class="login-box">
+            <input type="password" id="loginPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+            <button class="btn btn-primary" onclick="doLogin()">Unlock →</button>
+            <div class="login-error" id="loginError"></div>
+        </div>
+        <div class="login-hint">Default password: <strong>admin</strong> &nbsp;·&nbsp; Esc to close</div>
+    </div>
+
+    <!-- Admin UI -->
+    <div class="admin-layout" id="adminUI" style="display:none;width:100%">
+        <aside class="admin-sidebar">
+            <div class="sidebar-logo">
+                <div class="sl-label">CMS</div>
+                <div class="sl-name" id="sidebarName">—</div>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sbtn active" onclick="showAPanel('profile')"    id="abtn-profile">   <span class="ico">◈</span>Profile</button>
+                <button class="sbtn"        onclick="showAPanel('projects')"   id="abtn-projects">  <span class="ico">◻</span>Projects</button>
+                <button class="sbtn"        onclick="showAPanel('experience')" id="abtn-experience"><span class="ico">◑</span>Experience</button>
+                <button class="sbtn"        onclick="showAPanel('blog')"       id="abtn-blog">      <span class="ico">✦</span>Blog Posts</button>
+                <button class="sbtn"        onclick="showAPanel('links')"      id="abtn-links">     <span class="ico">↗</span>Links</button>
+            </nav>
+            <div class="sidebar-foot">
+                <button class="sbtn" onclick="closeAdmin()" style="color:var(--adm-green)"><span class="ico">◉</span>View Site</button>
+                <button class="sbtn" onclick="closeAdmin()"><span class="ico">←</span>Exit</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-topbar">
+                <h1 id="aPanelTitle">Profile</h1>
+                <div class="db-status"><span class="db-dot" id="dbDot"></span><span id="dbLabel" style="color:var(--adm-muted)">Connecting…</span></div>
+            </div>
+            <div class="admin-body">
+
+                <!-- Profile -->
+                <div class="apanel active" id="apanel-profile">
+                    <div class="profile-form">
+                        <div class="fgrp"><label class="flbl">Full Name</label><input class="finput" id="pf-name" placeholder="Your Name"></div>
+                        <div class="fgrp"><label class="flbl">Tagline (shown large + italic on home)</label><input class="finput" id="pf-tagline" placeholder="Developer / Tinkerer / Builder"></div>
+                        <div class="fgrp"><label class="flbl">Email</label><input class="finput" id="pf-email" placeholder="you@example.com"></div>
+                        <div class="fgrp">
+                            <label class="flbl">Photo URL</label>
+                            <div class="photo-upload-row">
+                                <img class="photo-preview" id="photoPreview" src="" alt="" style="display:none">
+                                <div>
+                                    <input class="finput" id="pf-photo" placeholder="https://... (direct image URL)" oninput="previewPhoto()">
+                                    <div class="photo-upload-info" style="margin-top:6px">Paste a direct image URL. Use a square photo for best results. It will be displayed as a grayscale circle like nadh.in.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fgrp">
+                            <label class="flbl">About (HTML)</label>
+                            <textarea class="ftarea tall" id="pf-about"></textarea>
+                            <div class="fhint">Use &lt;p&gt; &lt;em&gt; &lt;strong&gt; &lt;a href="..."&gt; etc.</div>
+                        </div>
+                        <div><button class="btn btn-primary" id="saveProfileBtn" onclick="saveProfile()">Save Profile</button></div>
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="apanel" id="apanel-projects">
+                    <div class="sec-hdr"><span class="sec-label" id="projCount"></span><button class="btn btn-primary" onclick="openProjectDrawer()">+ Add Project</button></div>
+                    <div class="items-list" id="adminProjectsList"></div>
+                </div>
+
+                <!-- Experience -->
+                <div class="apanel" id="apanel-experience">
+                    <div class="sec-hdr"><span class="sec-label" id="expCount"></span><button class="btn btn-primary" onclick="openExpDrawer()">+ Add Experience</button></div>
+                    <div class="items-list" id="adminExpList"></div>
+                </div>
+
+                <!-- Blog -->
+                <div class="apanel" id="apanel-blog">
+                    <div class="sec-hdr"><span class="sec-label" id="blogCount"></span><button class="btn btn-primary" onclick="openPostDrawer()">+ New Post</button></div>
+                    <div class="items-list" id="adminBlogList"></div>
+                </div>
+
+                <!-- Links -->
+                <div class="apanel" id="apanel-links">
+                    <div style="max-width:460px;display:flex;flex-direction:column;gap:14px">
+                        <div style="font-size:.66rem;color:var(--adm-muted)">Links shown on the home page below your bio.</div>
+                        <div id="linksEditor"></div>
+                        <button class="btn btn-ghost btn-sm" onclick="addLinkRow()">+ Add Link</button>
+                        <div><button class="btn btn-primary" onclick="saveLinks()">Save Links</button></div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- DRAWERS -->
+<div class="drawer-overlay" id="projectDrawer">
+    <div class="drawer">
+        <div class="drawer-hdr"><span class="drawer-title" id="projDrawerTitle">Add Project</span><button class="drawer-close" onclick="closeDrawer('projectDrawer')">✕</button></div>
+        <div class="fgrp"><label class="flbl">Name</label><input class="finput" id="pd-name" placeholder="my-project"></div>
+        <div class="fgrp"><label class="flbl">Description</label><input class="finput" id="pd-desc" placeholder="What does it do?"></div>
+        <div class="fgrp"><label class="flbl">URL (optional)</label><input class="finput" id="pd-url" placeholder="https://github.com/..."></div>
+        <div class="fgrp"><label class="flbl">Tags (comma-separated)</label><input class="finput" id="pd-tags" placeholder="go, postgres, cli"></div>
+        <div class="dfooter">
+            <button class="btn btn-ghost" onclick="closeDrawer('projectDrawer')">Cancel</button>
+            <button class="btn btn-primary" id="saveProjectBtn" onclick="saveProject()">Save</button>
+        </div>
+    </div>
+</div>
+
+<div class="drawer-overlay" id="expDrawer">
+    <div class="drawer">
+        <div class="drawer-hdr"><span class="drawer-title" id="expDrawerTitle">Add Experience</span><button class="drawer-close" onclick="closeDrawer('expDrawer')">✕</button></div>
+        <div class="fgrp"><label class="flbl">Role / Title</label><input class="finput" id="ed-role" placeholder="Senior Engineer"></div>
+        <div class="fgrp"><label class="flbl">Company</label><input class="finput" id="ed-company" placeholder="Acme Corp"></div>
+        <div class="frow">
+            <div class="fgrp"><label class="flbl">Start</label><input class="finput" id="ed-start" placeholder="Jan 2022"></div>
+            <div class="fgrp"><label class="flbl">End</label><input class="finput" id="ed-end" placeholder="Present"></div>
+        </div>
+        <div class="fgrp"><label class="flbl">Description</label><textarea class="ftarea" id="ed-desc" placeholder="What did you work on?"></textarea></div>
+        <div class="dfooter">
+            <button class="btn btn-ghost" onclick="closeDrawer('expDrawer')">Cancel</button>
+            <button class="btn btn-primary" id="saveExpBtn" onclick="saveExp()">Save</button>
+        </div>
+    </div>
+</div>
+
+<div class="drawer-overlay" id="postDrawer">
+    <div class="drawer">
+        <div class="drawer-hdr"><span class="drawer-title" id="postDrawerTitle">New Post</span><button class="drawer-close" onclick="closeDrawer('postDrawer')">✕</button></div>
+        <div class="fgrp"><label class="flbl">Title</label><input class="finput" id="bd-title" placeholder="Post title"></div>
+        <div class="frow">
+            <div class="fgrp"><label class="flbl">Date</label><input class="finput" id="bd-date" placeholder="Jan 2025"></div>
+            <div class="fgrp"><label class="flbl">Status</label>
+                <select class="fselect" id="bd-status"><option value="published">Published</option><option value="draft">Draft</option></select>
+            </div>
+        </div>
+        <div class="fgrp">
+            <label class="flbl">Body (HTML)</label>
+            <textarea class="ftarea tall" id="bd-body" style="min-height:300px" placeholder="<p>Your content...</p>&#10;&#10;<h2>A section</h2>&#10;<p>More...</p>&#10;&#10;<pre><code>// code</code></pre>"></textarea>
+            <div class="fhint">Supports: &lt;p&gt; &lt;h2&gt; &lt;code&gt; &lt;pre&gt; &lt;blockquote&gt; &lt;ul&gt; &lt;strong&gt; &lt;em&gt; &lt;a&gt;</div>
+        </div>
+        <div class="dfooter">
+            <button class="btn btn-ghost" onclick="closeDrawer('postDrawer')">Cancel</button>
+            <button class="btn btn-primary" id="savePostBtn" onclick="savePost()">Save</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ════════════════════════════════════════
+       SUPABASE
+    ════════════════════════════════════════ */
+    const SB_URL = 'https://bdmkukcgvamrjvunibkc.supabase.co';
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkbWt1a2NndmFtcmp2dW5pYmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzQyNjEsImV4cCI6MjA4NzcxMDI2MX0.KqGKD2RJlQi25ee83n64TpWTaq6Sax50H_aVjhD_pnE';
+    const SBH = { 'Content-Type':'application/json', 'apikey':SB_KEY, 'Authorization':'Bearer '+SB_KEY, 'Prefer':'return=representation' };
+
+    async function sbFetch(method, table, body, q='') {
+      const res = await fetch(`${SB_URL}/rest/v1/${table}${q}`, { method, headers:SBH, body:body?JSON.stringify(body):undefined });
+      if (!res.ok) throw new Error(`${res.status}: ${await res.text()}`);
+      const t = await res.text(); return t ? JSON.parse(t) : null;
+    }
+    const dbGet    = (t,q)   => sbFetch('GET',   t, null, q||'?select=*');
+    const dbPost   = (t,d)   => sbFetch('POST',  t, d);
+    const dbPatch  = (t,d,q) => sbFetch('PATCH', t, d, q);
+    const dbDelete = (t,q)   => sbFetch('DELETE',t, null, q);
+
+    /* ════════════════════════════════════════
+       STATE
+    ════════════════════════════════════════ */
+    let D = { profile:{}, projects:[], experience:[], posts:[], links:[] };
+    let editingProject=null, editingExp=null, editingPost=null;
+    let dbOk=false, adminUnlocked=false;
+    const ADMIN_PASS = localStorage.getItem('ptf_pass') || 'admin';
+
+    /* ════════════════════════════════════════
+       ROUTER
+    ════════════════════════════════════════ */
+    const ALL_PAGES   = ['home','projects','experience','blog','post'];
+    const NAV_PAGES   = ['home','projects','experience','blog'];
+
+    function getRoute() {
+      const h = location.hash.replace('#','');
+      if (!h || h === 'home') return { page:'home', id:null };
+      if (h.startsWith('post/'))  return { page:'post', id:parseInt(h.split('/')[1]) };
+      if (ALL_PAGES.includes(h))  return { page:h, id:null };
+      return { page:'home', id:null };
+    }
+
+    function onRoute() {
+      const { page, id } = getRoute();
+      ALL_PAGES.forEach(p => gi('page-'+p).classList.remove('active'));
+      gi('page-'+page).classList.add('active');
+      NAV_PAGES.forEach(p => {
+        const n = gi('nav-'+p); if (!n) return;
+        n.classList.toggle('active', page===p || (page==='post' && p==='blog'));
+      });
+      if (page==='post' && id) renderPostPage(id);
+      window.scrollTo(0,0);
+    }
+    window.addEventListener('hashchange', onRoute);
+
+    /* ════════════════════════════════════════
+       LOAD
+    ════════════════════════════════════════ */
+    async function loadAll() {
+      try {
+        const [prof, proj, exp, posts, links] = await Promise.all([
+          dbGet('profile','?select=*&limit=1'),
+          dbGet('projects','?select=*&order=display_order.asc,id.asc'),
+          dbGet('experience','?select=*&order=display_order.asc,id.asc'),
+          dbGet('posts','?select=*&order=id.desc'),
+          dbGet('links','?select=*&order=display_order.asc,id.asc'),
+        ]);
+        D.profile    = prof?.[0] || {};
+        D.projects   = proj  || [];
+        D.experience = exp   || [];
+        D.posts      = posts || [];
+        D.links      = links || [];
+        dbOk = true; setDbStatus(true);
+        renderAll();
+        if (adminUnlocked) renderAdminAll();
+      } catch(e) {
+        console.error(e); setDbStatus(false);
+        const err = '<p class="pg-error">Could not load — check Supabase tables are created.</p>';
+        ['homeAbout','projectsContent','experienceContent','blogContent'].forEach(id => gi(id).innerHTML=err);
+        showToast('Database error — see console','err');
+      }
+    }
+    function setDbStatus(ok) {
+      const dot=gi('dbDot'), lbl=gi('dbLabel');
+      if(dot) dot.className='db-dot '+(ok?'ok':'err');
+      if(lbl) { lbl.textContent=ok?'Supabase · connected':'Connection failed'; lbl.style.color=ok?'var(--adm-green)':'var(--adm-red)'; }
+    }
+
+    /* ════════════════════════════════════════
+       RENDER PORTFOLIO
+    ════════════════════════════════════════ */
+    function renderAll() {
+      const p = D.profile;
+      document.title = p.name || 'Portfolio';
+      gi('hdrName').textContent    = p.name    || 'Your Name';
+      gi('footerCopy').textContent = (p.name||'Portfolio') + ' © ' + new Date().getFullYear() + (p.email?' · '+p.email:'');
+      const sn = gi('sidebarName'); if(sn) sn.textContent = p.name||'—';
+
+      // Tagline
+      gi('homeTagline').textContent = p.tagline || 'Developer / Tinkerer / Builder';
+
+      // Photo
+      const photoWrap = gi('photoWrap');
+      const placeholder = gi('photoPlaceholder');
+      const photoUrl = p.photo_url || '';
+      if (photoUrl) {
+        placeholder.style.display = 'none';
+        let img = photoWrap.querySelector('img.home-photo');
+        if (!img) { img = document.createElement('img'); img.className='home-photo'; photoWrap.appendChild(img); }
+        img.src = photoUrl; img.alt = p.name||'Photo';
+      } else {
+        placeholder.style.display = 'flex';
+        const img = photoWrap.querySelector('img.home-photo');
+        if (img) img.remove();
+      }
+
+      // About
+      gi('homeAbout').innerHTML = p.about || '<p class="pg-empty">Add your bio in the admin panel.</p>';
+
+      // Links
+      gi('homeLinks').innerHTML = D.links.length
+        ? D.links.map(l=>`<a href="${esc(l.url)}" target="_blank">${esc(l.label)}</a>`).join('')
+        : '';
+
+      // Blog preview on home (latest 5)
+      const pub = D.posts.filter(p=>p.status==='published');
+      if (pub.length) {
+        gi('homePostsSection').style.display='block';
+        gi('homePostsList').innerHTML = pub.slice(0,5).map(p=>`
+          <div class="home-post-row">
+            <span class="home-post-date">${esc(p.date)}</span>
+            <a class="home-post-link" href="#post/${p.id}">${esc(p.title)}</a>
+          </div>`).join('');
+      } else {
+        gi('homePostsSection').style.display='none';
+      }
+
+      // Projects page
+      gi('projectsContent').innerHTML = D.projects.length===0
+        ? '<p class="pg-empty">No projects yet.</p>'
+        : D.projects.map(pr=>`
+          <div class="project-row">
+            <a class="project-name" href="${esc(pr.url||'')}" ${pr.url?'target="_blank"':'onclick="return false;"'}>${esc(pr.name)}</a>
+            <span class="project-desc">${esc(pr.description)}</span>
+            <div class="project-tags">${(pr.tags||[]).map(t=>`<span class="ptag">${esc(t)}</span>`).join('')}</div>
+          </div>`).join('');
+
+      // Experience page
+      gi('experienceContent').innerHTML = D.experience.length===0
+        ? '<p class="pg-empty">No experience added yet.</p>'
+        : D.experience.map(e=>`
+          <div class="exp-item">
+            <div class="exp-top"><span class="exp-role">${esc(e.role)}</span><span class="exp-period">${esc(e.start_period)} – ${esc(e.end_period)}</span></div>
+            <div class="exp-company">${esc(e.company)}</div>
+            <div class="exp-desc">${esc(e.description)}</div>
+          </div>`).join('');
+
+      // Blog list page
+      gi('blogContent').innerHTML = pub.length===0
+        ? '<p class="pg-empty">No posts yet.</p>'
+        : pub.map(p=>`
+          <div class="post-row">
+            <span class="post-date">${esc(p.date)}</span>
+            <a class="post-link" href="#post/${p.id}">${esc(p.title)}</a>
+          </div>`).join('');
+
+      // Re-render post if on that page
+      const { page, id } = getRoute();
+      if (page==='post' && id) renderPostPage(id);
+    }
+
+    function renderPostPage(id) {
+      const p = D.posts.find(x=>x.id===id);
+      if (!p) { location.hash='blog'; return; }
+      gi('postPageTitle').textContent = p.title;
+      gi('postPageDate').textContent  = p.date;
+      gi('postPageBody').innerHTML    = p.body;
+    }
+
+    /* ════════════════════════════════════════
+       ADMIN AUTH
+    ════════════════════════════════════════ */
+    function openAdmin() {
+      gi('adminOverlay').classList.add('open');
+      gi('adminLogin').style.display = adminUnlocked?'none':'flex';
+      gi('adminUI').style.display    = adminUnlocked?'flex':'none';
+      document.body.style.overflow   = 'hidden';
+      if (!adminUnlocked) setTimeout(()=>gi('loginPass').focus(),80);
+      else { setDbStatus(dbOk); renderAdminAll(); }
+    }
+    function doLogin() {
+      if (gi('loginPass').value===ADMIN_PASS) {
+        adminUnlocked=true;
+        gi('adminLogin').style.display='none'; gi('adminUI').style.display='flex';
+        gi('loginPass').value=''; gi('loginError').textContent='';
+        setDbStatus(dbOk); renderAdminAll();
+      } else { gi('loginError').textContent='Incorrect password.'; gi('loginPass').value=''; }
+    }
+    function closeAdmin() { gi('adminOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+    /* ════════════════════════════════════════
+       ADMIN PANELS
+    ════════════════════════════════════════ */
+    const PTITLES = {profile:'Profile',projects:'Projects',experience:'Experience',blog:'Blog Posts',links:'Links'};
+    function showAPanel(n) {
+      document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
+      document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+      gi('apanel-'+n).classList.add('active'); gi('abtn-'+n).classList.add('active');
+      gi('aPanelTitle').textContent = PTITLES[n];
+    }
+    function renderAdminAll() { renderAProfile(); renderAProjects(); renderAExp(); renderABlog(); renderALinks(); }
+
+    /* PROFILE */
+    function renderAProfile() {
+      gi('pf-name').value    = D.profile.name      || '';
+      gi('pf-tagline').value = D.profile.tagline   || '';
+      gi('pf-email').value   = D.profile.email     || '';
+      gi('pf-photo').value   = D.profile.photo_url || '';
+      gi('pf-about').value   = D.profile.about     || '';
+      previewPhoto();
+    }
+    function previewPhoto() {
+      const url = gi('pf-photo').value.trim();
+      const prev = gi('photoPreview');
+      if (url) { prev.src=url; prev.style.display='block'; }
+      else { prev.style.display='none'; }
+    }
+    async function saveProfile() {
+      const btn=gi('saveProfileBtn');
+      const data={name:v('pf-name'),tagline:v('pf-tagline'),email:v('pf-email'),photo_url:v('pf-photo'),about:gi('pf-about').value.trim()};
+      setLoading(btn,true,'Saving…');
+      try {
+        if(D.profile.id) await dbPatch('profile',data,`?id=eq.${D.profile.id}`);
+        else { const r=await dbPost('profile',data); D.profile.id=r?.[0]?.id; }
+        D.profile={...D.profile,...data}; renderAll(); showToast('Profile saved');
+      } catch(e){showToast('Error: '+e.message,'err');}
+      setLoading(btn,false,'Save Profile');
+    }
+
+    /* PROJECTS */
+    function renderAProjects() {
+      gi('projCount').textContent=D.projects.length+' project'+(D.projects.length!==1?'s':'');
+      gi('adminProjectsList').innerHTML=D.projects.length===0
+        ?'<div class="empty-state">No projects yet.</div>'
+        :D.projects.map((p,i)=>`
+          <div class="icard">
+            <div class="icard-info">
+              <div class="icard-title">${esc(p.name)}</div>
+              <div class="icard-sub">${esc(p.description)}</div>
+              <div class="icard-tags">${(p.tags||[]).map(t=>`<span class="icard-tag">${esc(t)}</span>`).join('')}</div>
+            </div>
+            <div class="icard-actions">
+              <button class="btn btn-ghost btn-sm" onclick="openProjectDrawer(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteProject(${i})">Delete</button>
+            </div>
+          </div>`).join('');
+    }
+    function openProjectDrawer(idx) {
+      editingProject=idx!==undefined?idx:null;
+      gi('projDrawerTitle').textContent=idx!==undefined?'Edit Project':'Add Project';
+      const p=idx!==undefined?D.projects[idx]:{};
+      gi('pd-name').value=p.name||''; gi('pd-desc').value=p.description||'';
+      gi('pd-url').value=p.url||''; gi('pd-tags').value=(p.tags||[]).join(', ');
+      gi('projectDrawer').classList.add('open');
+    }
+    async function saveProject() {
+      const btn=gi('saveProjectBtn');
+      const data={name:v('pd-name'),description:v('pd-desc'),url:v('pd-url'),tags:v('pd-tags').split(',').map(t=>t.trim()).filter(Boolean),display_order:editingProject!==null?D.projects[editingProject].display_order:D.projects.length};
+      if(!data.name){showToast('Name required','err');return;}
+      setLoading(btn,true,'Saving…');
+      try {
+        if(editingProject!==null){await dbPatch('projects',data,`?id=eq.${D.projects[editingProject].id}`);D.projects[editingProject]={...D.projects[editingProject],...data};}
+        else{const r=await dbPost('projects',data);D.projects.push(r[0]);}
+        renderAProjects();renderAll();closeDrawer('projectDrawer');
+        showToast(editingProject!==null?'Updated':'Added');editingProject=null;
+      }catch(e){showToast('Error: '+e.message,'err');}
+      setLoading(btn,false,'Save');
+    }
+    async function deleteProject(idx) {
+      if(!confirm('Delete?'))return;
+      try{await dbDelete('projects',`?id=eq.${D.projects[idx].id}`);D.projects.splice(idx,1);renderAProjects();renderAll();showToast('Deleted');}
+      catch(e){showToast('Error: '+e.message,'err');}
+    }
+
+    /* EXPERIENCE */
+    function renderAExp() {
+      gi('expCount').textContent=D.experience.length+' position'+(D.experience.length!==1?'s':'');
+      gi('adminExpList').innerHTML=D.experience.length===0
+        ?'<div class="empty-state">No experience yet.</div>'
+        :D.experience.map((e,i)=>`
+          <div class="icard">
+            <div class="icard-info">
+              <div class="icard-title">${esc(e.role)} · ${esc(e.company)}</div>
+              <div class="icard-sub">${esc(e.start_period)} – ${esc(e.end_period)}</div>
+              <div class="icard-sub" style="margin-top:3px">${esc(e.description)}</div>
+            </div>
+            <div class="icard-actions">
+              <button class="btn btn-ghost btn-sm" onclick="openExpDrawer(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteExp(${i})">Delete</button>
+            </div>
+          </div>`).join('');
+    }
+    function openExpDrawer(idx) {
+      editingExp=idx!==undefined?idx:null;
+      gi('expDrawerTitle').textContent=idx!==undefined?'Edit Experience':'Add Experience';
+      const e=idx!==undefined?D.experience[idx]:{};
+      gi('ed-role').value=e.role||'';gi('ed-company').value=e.company||'';
+      gi('ed-start').value=e.start_period||'';gi('ed-end').value=e.end_period||'';gi('ed-desc').value=e.description||'';
+      gi('expDrawer').classList.add('open');
+    }
+    async function saveExp() {
+      const btn=gi('saveExpBtn');
+      const data={role:v('ed-role'),company:v('ed-company'),start_period:v('ed-start'),end_period:v('ed-end'),description:v('ed-desc'),display_order:editingExp!==null?D.experience[editingExp].display_order:D.experience.length};
+      if(!data.role||!data.company){showToast('Role and company required','err');return;}
+      setLoading(btn,true,'Saving…');
+      try {
+        if(editingExp!==null){await dbPatch('experience',data,`?id=eq.${D.experience[editingExp].id}`);D.experience[editingExp]={...D.experience[editingExp],...data};}
+        else{const r=await dbPost('experience',data);D.experience.push(r[0]);}
+        renderAExp();renderAll();closeDrawer('expDrawer');
+        showToast(editingExp!==null?'Updated':'Added');editingExp=null;
+      }catch(e){showToast('Error: '+e.message,'err');}
+      setLoading(btn,false,'Save');
+    }
+    async function deleteExp(idx) {
+      if(!confirm('Delete?'))return;
+      try{await dbDelete('experience',`?id=eq.${D.experience[idx].id}`);D.experience.splice(idx,1);renderAExp();renderAll();showToast('Deleted');}
+      catch(e){showToast('Error: '+e.message,'err');}
+    }
+
+    /* BLOG */
+    function renderABlog() {
+      gi('blogCount').textContent=D.posts.length+' post'+(D.posts.length!==1?'s':'');
+      gi('adminBlogList').innerHTML=D.posts.length===0
+        ?'<div class="empty-state">No posts yet.</div>'
+        :D.posts.map((p,i)=>`
+          <div class="icard">
+            <div class="icard-info">
+              <div class="icard-title">${esc(p.title)}</div>
+              <div class="icard-sub">${esc(p.date)} · <span style="color:${p.status==='published'?'var(--adm-green)':'var(--adm-muted)'}">${p.status}</span></div>
+            </div>
+            <div class="icard-actions">
+              <button class="btn btn-ghost btn-sm" onclick="openPostDrawer(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deletePost(${i})">Delete</button>
+            </div>
+          </div>`).join('');
+    }
+    function openPostDrawer(idx) {
+      editingPost=idx!==undefined?idx:null;
+      gi('postDrawerTitle').textContent=idx!==undefined?'Edit Post':'New Post';
+      const p=idx!==undefined?D.posts[idx]:{};
+      gi('bd-title').value=p.title||'';gi('bd-date').value=p.date||'';
+      gi('bd-status').value=p.status||'published';gi('bd-body').value=p.body||'';
+      gi('postDrawer').classList.add('open');
+    }
+    async function savePost() {
+      const btn=gi('savePostBtn');
+      const data={title:v('bd-title'),date:v('bd-date'),status:gi('bd-status').value,body:gi('bd-body').value.trim()};
+      if(!data.title){showToast('Title required','err');return;}
+      setLoading(btn,true,'Saving…');
+      try {
+        if(editingPost!==null){await dbPatch('posts',data,`?id=eq.${D.posts[editingPost].id}`);D.posts[editingPost]={...D.posts[editingPost],...data};}
+        else{const r=await dbPost('posts',data);D.posts.unshift(r[0]);}
+        renderABlog();renderAll();closeDrawer('postDrawer');
+        showToast(editingPost!==null?'Updated':'Published');editingPost=null;
+      }catch(e){showToast('Error: '+e.message,'err');}
+      setLoading(btn,false,'Save');
+    }
+    async function deletePost(idx) {
+      if(!confirm('Delete?'))return;
+      try{await dbDelete('posts',`?id=eq.${D.posts[idx].id}`);D.posts.splice(idx,1);renderABlog();renderAll();showToast('Deleted');}
+      catch(e){showToast('Error: '+e.message,'err');}
+    }
+
+    /* LINKS */
+    function renderALinks() {
+      gi('linksEditor').innerHTML=D.links.map((l,i)=>`
+        <div style="display:flex;gap:9px;margin-bottom:9px;align-items:center">
+          <input class="finput" style="width:110px" value="${esc(l.label)}" id="lk-l-${i}" placeholder="github">
+          <input class="finput" style="flex:1" value="${esc(l.url)}" id="lk-u-${i}" placeholder="https://...">
+          <button class="btn btn-danger btn-sm" onclick="removeLinkRow(${i})">✕</button>
+        </div>`).join('');
+    }
+    function addLinkRow(){D.links.push({label:'',url:''});renderALinks();}
+    function removeLinkRow(i){D.links.splice(i,1);renderALinks();}
+    async function saveLinks() {
+      const updated=D.links.map((l,i)=>({...l,label:(gi('lk-l-'+i)||{value:l.label}).value.trim(),url:(gi('lk-u-'+i)||{value:l.url}).value.trim()})).filter(l=>l.label&&l.url);
+      try {
+        if(D.links.some(l=>l.id)) await dbDelete('links','?id=gt.0');
+        const rows=await Promise.all(updated.map((l,i)=>dbPost('links',{label:l.label,url:l.url,display_order:i})));
+        D.links=rows.map(r=>r[0]);
+        renderAll();renderALinks();showToast('Links saved');
+      }catch(e){showToast('Error: '+e.message,'err');}
+    }
+
+    /* ════════════════════════════════════════
+       UTILS
+    ════════════════════════════════════════ */
+    function gi(id){ return document.getElementById(id); }
+    function v(id) { return gi(id).value.trim(); }
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function setLoading(btn,on,label){ btn.disabled=on; btn.textContent=label; }
+    function closeDrawer(id){ gi(id).classList.remove('open'); }
+    document.querySelectorAll('.drawer-overlay').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.classList.remove('open');}));
+    document.addEventListener('keydown',e=>{
+      if(e.key!=='Escape')return;
+      const od=document.querySelector('.drawer-overlay.open');
+      if(od){od.classList.remove('open');return;}
+      if(gi('adminOverlay').classList.contains('open')){closeAdmin();return;}
+    });
+    let _tt;
+    function showToast(msg,type='ok'){
+      const ex=document.querySelector('.toast');if(ex)ex.remove();clearTimeout(_tt);
+      const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;
+      document.body.appendChild(t);_tt=setTimeout(()=>t.remove(),3000);
+    }
+
+    /* ════════════════════════════════════════
+       BOOT — need photo_url column in profile
+       ALTER TABLE profile ADD COLUMN IF NOT EXISTS photo_url text;
+       ALTER TABLE profile ADD COLUMN IF NOT EXISTS tagline text;
+    ════════════════════════════════════════ */
+    onRoute();
+    loadAll().then(()=>onRoute());
+</script>
+</body>
+</html>
