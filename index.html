@@ -555,13 +555,18 @@ window.addEventListener('hashchange', onRoute);
 
 // ═══ LOAD ════════════════════════════════════════════
 async function loadAll() {
+  // 6 second timeout — if Supabase doesn't respond, clear skeletons gracefully
+  const timeout = new Promise((_,reject) => setTimeout(()=>reject(new Error('timeout')), 6000));
   try {
-    const [prof,proj,exp,posts,links] = await Promise.all([
-      dbGet('profile','?select=*&limit=1'),
-      dbGet('projects','?select=*&order=display_order.asc,id.asc'),
-      dbGet('experience','?select=*&order=display_order.asc,id.asc'),
-      dbGet('posts','?select=*&order=id.desc'),
-      dbGet('links','?select=*&order=display_order.asc,id.asc'),
+    const [prof,proj,exp,posts,links] = await Promise.race([
+      Promise.all([
+        dbGet('profile','?select=*&limit=1'),
+        dbGet('projects','?select=*&order=display_order.asc,id.asc'),
+        dbGet('experience','?select=*&order=display_order.asc,id.asc'),
+        dbGet('posts','?select=*&order=id.desc'),
+        dbGet('links','?select=*&order=display_order.asc,id.asc'),
+      ]),
+      timeout
     ]);
     D.profile    = prof?.[0]||{};
     D.projects   = proj||[];
@@ -572,11 +577,22 @@ async function loadAll() {
     renderAll();
     if (adminUnlocked) renderAdminAll();
   } catch(e) {
-    console.error(e); setDbStatus(false);
-    const msg='<p class="pg-error">Could not load — check Supabase tables exist.</p>';
-    ['homeAbout','projectsContent','experienceContent','blogContent'].forEach(id=>gi(id).innerHTML=msg);
-    showToast('Database error — see console','err');
+    console.error('Load failed:', e.message);
+    setDbStatus(false);
+    clearSkeletons();
+    if (e.message === 'timeout') {
+      showToast('Database is slow — try refreshing', 'err');
+    }
   }
+}
+
+function clearSkeletons() {
+  // Replace all skeleton placeholders with empty states
+  gi('homeTagline').textContent = '';
+  gi('homeAbout').innerHTML = '';
+  gi('projectsContent').innerHTML = '<p style="color:#888;font-size:.95rem;font-style:italic">No data — database may be offline.</p>';
+  gi('experienceContent').innerHTML = '';
+  gi('blogContent').innerHTML = '';
 }
 function setDbStatus(ok) {
   const dot=gi('dbDot'),lbl=gi('dbLabel');
