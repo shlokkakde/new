@@ -218,7 +218,34 @@ body{background:var(--bg);color:var(--fg);font-family:'EB Garamond',Georgia,seri
 .img-status.err{color:var(--adm-red)}
 
 @media(max-width:700px){.home-body{grid-template-columns:1fr}.home-photo-wrap{order:-1}.home-photo,.home-photo-placeholder{width:140px;height:140px}.project-row{grid-template-columns:1fr;gap:4px}.project-tags{justify-content:flex-start}#site-header{gap:12px}.site-name{font-size:1.6rem}.admin-sidebar{display:none}.frow{grid-template-columns:1fr}.drawer{width:100%}}
+/* Mobile Fix */
+@media (max-width: 600px) {
+  .home-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
+  .home-photo, .home-photo-placeholder {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
+
+  #site-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .site-nav {
+    justify-content: center;
+  }
+
+  .wrap {
+    padding: 0 16px;
+  }
+}
 /* skeleton shimmer for loading state */
 .skel{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;border-radius:3px;display:inline-block}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
@@ -1020,3 +1047,4 @@ loadAll().then(()=>onRoute());
 </script>
 </body>
 </html>
+
