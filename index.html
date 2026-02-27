@@ -1,1005 +1,1006 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-          --bg:#fff; --fg:#1a1a1a; --muted:#444; --faint:#888;
-          --link:#c0392b; --border:#e8e8e8; --subtle:#f8f8f8;
-          --adm-bg:#0f1117; --adm-surface:#1a1d27; --adm-surface2:#242736;
-          --adm-border:#2e3247; --adm-muted:#6b7280; --adm-fg:#e2e5f0;
-          --adm-green:#22c55e; --adm-red:#ef4444;
-        }
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{background:var(--bg);color:var(--fg);font-family:'EB Garamond',Georgia,serif;font-size:19px;line-height:1.75;min-height:100vh}
-        .wrap{max-width:860px;margin:0 auto;padding:0 32px}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#fff; --fg:#1a1a1a; --muted:#444; --faint:#888;
+  --link:#c0392b; --border:#e8e8e8; --subtle:#f8f8f8;
+  --adm-bg:#0f1117; --adm-surface:#1a1d27; --adm-surface2:#242736;
+  --adm-border:#2e3247; --adm-muted:#6b7280; --adm-fg:#e2e5f0;
+  --adm-green:#22c55e; --adm-red:#ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:'EB Garamond',Georgia,serif;font-size:19px;line-height:1.75;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 32px}
 
-        /* HEADER */
-        #site-header{display:flex;align-items:baseline;justify-content:space-between;padding:40px 0 28px;border-bottom:1px solid var(--border);gap:20px;flex-wrap:wrap}
-        .site-name{font-family:'EB Garamond',serif;font-size:2rem;font-weight:700;color:var(--fg);text-decoration:none;letter-spacing:-0.01em;line-height:1;flex-shrink:0}
-        .site-name:hover{color:var(--link)}
-        .site-nav{display:flex;gap:28px;align-items:baseline;flex-wrap:wrap}
-        .site-nav a{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--link);text-decoration:none;transition:opacity .15s}
-        .site-nav a:hover{opacity:.7}
-        .site-nav a.active{text-decoration:underline;text-underline-offset:3px}
+/* HEADER */
+#site-header{display:flex;align-items:baseline;justify-content:space-between;padding:40px 0 28px;border-bottom:1px solid var(--border);gap:20px;flex-wrap:wrap}
+.site-name{font-family:'EB Garamond',serif;font-size:2rem;font-weight:700;color:var(--fg);text-decoration:none;letter-spacing:-0.01em;line-height:1;flex-shrink:0}
+.site-name:hover{color:var(--link)}
+.site-nav{display:flex;gap:28px;align-items:baseline;flex-wrap:wrap}
+.site-nav a{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--link);text-decoration:none;transition:opacity .15s}
+.site-nav a:hover{opacity:.7}
+.site-nav a.active{text-decoration:underline;text-underline-offset:3px}
 
-        /* PAGES */
-        .page{display:none;padding:48px 0 96px}
-        .page.active{display:block;animation:fadeIn .18s ease}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes slideIn{from{transform:translateX(36px);opacity:0}to{transform:translateX(0);opacity:1}}
-        @keyframes slideUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+/* PAGES */
+.page{display:none;padding:48px 0 96px}
+.page.active{display:block;animation:fadeIn .18s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{transform:translateX(36px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
 
-        /* HOME */
-        .home-tagline{font-size:2.1rem;font-style:italic;font-weight:400;margin-bottom:40px;line-height:1.3}
-        .home-body{display:grid;grid-template-columns:1fr 220px;gap:48px;align-items:start}
-        .home-text p{margin-bottom:1.1em}
-        .home-text a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
-        .home-text em{font-style:italic}
-        .home-photo-wrap{display:flex;justify-content:center;padding-top:4px}
-        .home-photo{width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center top;display:block;filter:grayscale(100%)}
-        .home-photo-placeholder{width:200px;height:200px;border-radius:50%;background:#ebebeb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#aaa;font-size:.72rem;font-family:'JetBrains Mono',monospace;text-align:center;cursor:pointer;border:2px dashed #d0d0d0;transition:border-color .2s,color .2s}
-        .home-photo-placeholder:hover{border-color:var(--link);color:var(--link)}
-        .home-photo-placeholder .ph-icon{font-size:2rem;line-height:1}
-        .home-links{margin-top:36px;display:flex;gap:20px;flex-wrap:wrap}
-        .home-links a{font-size:.95rem;color:var(--link);text-decoration:underline;text-underline-offset:2px}
-        .home-links a:hover{opacity:.7}
-        .home-posts-section{margin-top:56px}
-        .home-posts-title{font-size:1rem;font-weight:500;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-        .home-post-row{display:flex;gap:20px;padding:8px 0;border-bottom:1px solid var(--border);align-items:baseline}
-        .home-post-date{font-size:.82rem;color:var(--faint);font-family:'JetBrains Mono',monospace;min-width:80px;white-space:nowrap}
-        .home-post-link{font-size:.97rem;color:var(--link);text-decoration:none}
-        .home-post-link:hover{text-decoration:underline}
+/* HOME */
+.home-tagline{font-size:2.1rem;font-style:italic;font-weight:400;margin-bottom:40px;line-height:1.3}
+.home-body{display:grid;grid-template-columns:1fr 220px;gap:48px;align-items:start}
+.home-text p{margin-bottom:1.1em}
+.home-text a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+.home-text em{font-style:italic}
+.home-photo-wrap{display:flex;justify-content:center;padding-top:4px}
+.home-photo{width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center top;display:block;filter:grayscale(100%)}
+.home-photo-placeholder{width:200px;height:200px;border-radius:50%;background:#ebebeb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#aaa;font-size:.72rem;font-family:'JetBrains Mono',monospace;text-align:center;cursor:pointer;border:2px dashed #d0d0d0;transition:border-color .2s,color .2s}
+.home-photo-placeholder:hover{border-color:var(--link);color:var(--link)}
+.home-photo-placeholder .ph-icon{font-size:2rem;line-height:1}
+.home-links{margin-top:36px;display:flex;gap:20px;flex-wrap:wrap}
+.home-links a{font-size:.95rem;color:var(--link);text-decoration:underline;text-underline-offset:2px}
+.home-links a:hover{opacity:.7}
+.home-posts-section{margin-top:56px}
+.home-posts-title{font-size:1rem;font-weight:500;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.home-post-row{display:flex;gap:20px;padding:8px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.home-post-date{font-size:.82rem;color:var(--faint);font-family:'JetBrains Mono',monospace;min-width:80px;white-space:nowrap}
+.home-post-link{font-size:.97rem;color:var(--link);text-decoration:none}
+.home-post-link:hover{text-decoration:underline}
 
-        /* PAGES */
-        .page-title{font-size:1.75rem;font-style:italic;font-weight:400;margin-bottom:36px}
+/* PAGES */
+.page-title{font-size:1.75rem;font-style:italic;font-weight:400;margin-bottom:36px}
 
-        /* PROJECTS */
-        .project-row{display:grid;grid-template-columns:200px 1fr auto;gap:8px 20px;padding:12px 0;border-bottom:1px solid var(--border);align-items:baseline}
-        .project-row:first-of-type{border-top:1px solid var(--border)}
-        .project-name{font-size:.82rem;font-weight:500;color:var(--link);text-decoration:none;font-family:'JetBrains Mono',monospace}
-        .project-name:hover{text-decoration:underline}
-        .project-desc{font-size:.95rem;color:var(--muted)}
-        .project-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
-        .ptag{font-size:.6rem;color:var(--faint);border:1px solid var(--border);padding:1px 6px;border-radius:2px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+/* PROJECTS */
+.project-row{display:grid;grid-template-columns:200px 1fr auto;gap:8px 20px;padding:12px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.project-row:first-of-type{border-top:1px solid var(--border)}
+.project-name{font-size:.82rem;font-weight:500;color:var(--link);text-decoration:none;font-family:'JetBrains Mono',monospace}
+.project-name:hover{text-decoration:underline}
+.project-desc{font-size:.95rem;color:var(--muted)}
+.project-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.ptag{font-size:.6rem;color:var(--faint);border:1px solid var(--border);padding:1px 6px;border-radius:2px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
 
-        /* EXPERIENCE */
-        .exp-item{padding:18px 0;border-bottom:1px solid var(--border)}
-        .exp-item:first-of-type{border-top:1px solid var(--border)}
-        .exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:3px}
-        .exp-role{font-size:1rem;font-weight:500}
-        .exp-period{font-size:.76rem;color:var(--faint);font-family:'JetBrains Mono',monospace;white-space:nowrap}
-        .exp-company{font-size:.88rem;color:var(--link);margin-bottom:6px}
-        .exp-desc{font-size:.93rem;color:var(--muted)}
+/* EXPERIENCE */
+.exp-item{padding:18px 0;border-bottom:1px solid var(--border)}
+.exp-item:first-of-type{border-top:1px solid var(--border)}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:3px}
+.exp-role{font-size:1rem;font-weight:500}
+.exp-period{font-size:.76rem;color:var(--faint);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.exp-company{font-size:.88rem;color:var(--link);margin-bottom:6px}
+.exp-desc{font-size:.93rem;color:var(--muted)}
 
-        /* BLOG LIST */
-        .post-row{display:flex;gap:24px;padding:10px 0;border-bottom:1px solid var(--border);align-items:baseline}
-        .post-row:first-of-type{border-top:1px solid var(--border)}
-        .post-date{font-size:.78rem;color:var(--faint);font-family:'JetBrains Mono',monospace;white-space:nowrap;min-width:86px}
-        .post-link{font-size:1rem;color:var(--link);text-decoration:none}
-        .post-link:hover{text-decoration:underline}
+/* BLOG LIST */
+.post-row{display:flex;gap:24px;padding:10px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.post-row:first-of-type{border-top:1px solid var(--border)}
+.post-date{font-size:.78rem;color:var(--faint);font-family:'JetBrains Mono',monospace;white-space:nowrap;min-width:86px}
+.post-link{font-size:1rem;color:var(--link);text-decoration:none}
+.post-link:hover{text-decoration:underline}
 
-        /* BLOG POST */
-        .post-back{font-size:.88rem;color:var(--link);text-decoration:none;display:inline-block;margin-bottom:28px}
-        .post-back:hover{text-decoration:underline}
-        .post-page-date{font-size:.8rem;color:var(--faint);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
-        .post-page-title{font-size:1.9rem;font-weight:500;line-height:1.3;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-        .post-content{font-size:1rem;line-height:1.85}
-        .post-content p{margin-bottom:1.3em}
-        .post-content h2{font-size:1.3rem;font-weight:500;font-style:italic;margin:2em 0 .6em}
-        .post-content code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--subtle);border:1px solid var(--border);padding:1px 5px;border-radius:2px}
-        .post-content pre{background:var(--subtle);border:1px solid var(--border);padding:16px 20px;border-radius:3px;overflow-x:auto;margin:1.3em 0;line-height:1.6}
-        .post-content pre code{background:none;border:none;padding:0;font-size:.78rem}
-        .post-content blockquote{border-left:3px solid var(--border);padding-left:20px;color:var(--muted);font-style:italic;margin:1.3em 0}
-        .post-content a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
-        .post-content ul,.post-content ol{padding-left:1.6em;margin-bottom:1.2em}
-        .post-content li{margin-bottom:.3em}
-        .post-content img{max-width:100%;height:auto;display:block;margin:1.8em 0;border-radius:3px}
-        .post-content figure{margin:2em 0}
-        .post-content figure img{margin-bottom:10px}
-        .post-content figcaption{font-size:.82rem;color:var(--faint);font-style:italic;text-align:center}
+/* BLOG POST */
+.post-back{font-size:.88rem;color:var(--link);text-decoration:none;display:inline-block;margin-bottom:28px}
+.post-back:hover{text-decoration:underline}
+.post-page-date{font-size:.8rem;color:var(--faint);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
+.post-page-title{font-size:1.9rem;font-weight:500;line-height:1.3;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.post-content{font-size:1rem;line-height:1.85}
+.post-content p{margin-bottom:1.3em}
+.post-content h2{font-size:1.3rem;font-weight:500;font-style:italic;margin:2em 0 .6em}
+.post-content code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--subtle);border:1px solid var(--border);padding:1px 5px;border-radius:2px}
+.post-content pre{background:var(--subtle);border:1px solid var(--border);padding:16px 20px;border-radius:3px;overflow-x:auto;margin:1.3em 0;line-height:1.6}
+.post-content pre code{background:none;border:none;padding:0;font-size:.78rem}
+.post-content blockquote{border-left:3px solid var(--border);padding-left:20px;color:var(--muted);font-style:italic;margin:1.3em 0}
+.post-content a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+.post-content ul,.post-content ol{padding-left:1.6em;margin-bottom:1.2em}
+.post-content li{margin-bottom:.3em}
+.post-content img{max-width:100%;height:auto;display:block;margin:1.8em 0;border-radius:3px}
+.post-content figure{margin:2em 0}
+.post-content figure img{margin-bottom:10px}
+.post-content figcaption{font-size:.82rem;color:var(--faint);font-style:italic;text-align:center}
 
-        /* FOOTER */
-        #site-footer{border-top:1px solid var(--border);padding:22px 0 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-        .footer-copy{font-size:.82rem;color:var(--faint)}
-        .admin-trigger{font-size:.72rem;color:transparent;background:none;border:none;cursor:default;transition:color .3s;font-family:'JetBrains Mono',monospace}
-        .admin-trigger:hover{color:var(--faint);cursor:pointer}
+/* FOOTER */
+#site-footer{border-top:1px solid var(--border);padding:22px 0 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:.82rem;color:var(--faint)}
+.admin-trigger{font-size:.72rem;color:transparent;background:none;border:none;cursor:default;transition:color .3s;font-family:'JetBrains Mono',monospace}
+.admin-trigger:hover{color:var(--faint);cursor:pointer}
 
-        /* STATE */
-        .pg-loading{color:var(--faint);font-size:.85rem;padding:12px 0;font-family:'JetBrains Mono',monospace}
-        .pg-empty{color:var(--faint);font-size:.97rem;padding:12px 0;font-style:italic}
-        .pg-error{color:var(--adm-red);font-size:.82rem;padding:12px 0;font-family:'JetBrains Mono',monospace}
+/* STATE */
+.pg-loading{color:var(--faint);font-size:.85rem;padding:12px 0;font-family:'JetBrains Mono',monospace}
+.pg-empty{color:var(--faint);font-size:.97rem;padding:12px 0;font-style:italic}
+.pg-error{color:var(--adm-red);font-size:.82rem;padding:12px 0;font-family:'JetBrains Mono',monospace}
 
-        /* ADMIN */
-        .admin-overlay{display:none;position:fixed;inset:0;background:var(--adm-bg);z-index:500;overflow:hidden;font-family:'JetBrains Mono',monospace;color:var(--adm-fg)}
-        .admin-overlay.open{display:flex;animation:fadeIn .2s ease}
-        .admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:20px;padding:40px}
-        .login-box{background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:8px;padding:28px;width:100%;max-width:340px;display:flex;flex-direction:column;gap:14px}
-        .login-box input{background:var(--adm-bg);border:1px solid var(--adm-border);color:var(--adm-fg);padding:9px 13px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.8rem;outline:none;transition:border-color .2s;width:100%}
-        .login-box input:focus{border-color:#5b8af5}
-        .login-hint{font-size:.65rem;color:var(--adm-muted);text-align:center}
-        .login-error{color:var(--adm-red);font-size:.7rem;text-align:center;min-height:15px}
-        .admin-layout{display:flex;width:100%;height:100%}
-        .admin-sidebar{width:210px;min-width:210px;background:var(--adm-surface);border-right:1px solid var(--adm-border);display:flex;flex-direction:column;padding:22px 0}
-        .sidebar-logo{padding:0 18px 20px;border-bottom:1px solid var(--adm-border);margin-bottom:14px}
-        .sl-label{font-size:.62rem;color:var(--adm-muted);letter-spacing:.1em;text-transform:uppercase}
-        .sl-name{font-size:.82rem;color:var(--adm-fg);margin-top:2px}
-        .sidebar-nav{flex:1;display:flex;flex-direction:column;gap:2px;padding:0 10px}
-        .sbtn{background:none;border:none;color:var(--adm-muted);font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.03em;text-align:left;padding:8px 10px;border-radius:4px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:9px}
-        .sbtn:hover,.sbtn.active{background:var(--adm-surface2);color:var(--adm-fg)}
-        .sbtn .ico{width:14px;text-align:center;font-size:.8rem}
-        .sidebar-foot{padding:14px 10px 0;border-top:1px solid var(--adm-border);margin-top:14px}
-        .admin-main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
-        .admin-topbar{padding:18px 28px;border-bottom:1px solid var(--adm-border);display:flex;justify-content:space-between;align-items:center;background:var(--adm-surface);position:sticky;top:0;z-index:10}
-        .admin-topbar h1{font-size:.8rem;letter-spacing:.07em;text-transform:uppercase}
-        .db-status{font-size:.65rem;display:flex;align-items:center;gap:6px}
-        .db-dot{width:7px;height:7px;border-radius:50%;background:var(--adm-muted)}
-        .db-dot.ok{background:var(--adm-green)}
-        .db-dot.err{background:var(--adm-red)}
-        .admin-body{padding:28px;flex:1}
-        .apanel{display:none}
-        .apanel.active{display:block;animation:fadeIn .2s ease}
-        .sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-        .sec-label{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--adm-muted)}
-        .items-list{display:flex;flex-direction:column;margin-bottom:20px}
-        .icard{background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:5px;padding:14px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:7px;transition:border-color .15s}
-        .icard:hover{border-color:#5b8af5}
-        .icard-info{flex:1;min-width:0}
-        .icard-title{font-size:.78rem;color:var(--adm-fg);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-        .icard-sub{font-size:.66rem;color:var(--adm-muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-        .icard-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-        .icard-tag{font-size:.6rem;background:var(--adm-surface2);border:1px solid var(--adm-border);padding:1px 7px;border-radius:2px;color:var(--adm-muted)}
-        .icard-actions{display:flex;gap:7px;flex-shrink:0}
-        .btn{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:7px 13px;border-radius:4px;border:1px solid;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px}
-        .btn:disabled{opacity:.5;cursor:not-allowed}
-        .btn-primary{background:#c0392b;border-color:#c0392b;color:#fff}
-        .btn-primary:hover:not(:disabled){background:#a93226}
-        .btn-ghost{background:transparent;border-color:var(--adm-border);color:var(--adm-muted)}
-        .btn-ghost:hover:not(:disabled){border-color:var(--adm-fg);color:var(--adm-fg)}
-        .btn-danger{background:transparent;border-color:var(--adm-border);color:var(--adm-red)}
-        .btn-danger:hover:not(:disabled){border-color:var(--adm-red);background:rgba(239,68,68,.07)}
-        .btn-sm{padding:4px 9px;font-size:.63rem}
-        .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600}
-        .drawer-overlay.open{display:flex;justify-content:flex-end;animation:fadeIn .18s ease}
-        .drawer{width:500px;max-width:100%;background:var(--adm-surface);height:100%;overflow-y:auto;padding:28px;display:flex;flex-direction:column;gap:18px;animation:slideIn .22s ease}
-        .drawer-hdr{display:flex;justify-content:space-between;align-items:center}
-        .drawer-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
-        .drawer-close{background:none;border:none;color:var(--adm-muted);font-size:1.1rem;cursor:pointer;padding:3px;transition:color .15s}
-        .drawer-close:hover{color:var(--adm-fg)}
-        .fgrp{display:flex;flex-direction:column;gap:7px}
-        .flbl{font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--adm-muted)}
-        .finput,.ftarea,.fselect{background:var(--adm-bg);border:1px solid var(--adm-border);color:var(--adm-fg);padding:9px 13px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.76rem;outline:none;transition:border-color .2s;width:100%}
-        .finput:focus,.ftarea:focus,.fselect:focus{border-color:#5b8af5}
-        .ftarea{resize:vertical;min-height:110px;line-height:1.6}
-        .fhint{font-size:.61rem;color:var(--adm-muted)}
-        .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-        .dfooter{display:flex;gap:10px;justify-content:flex-end;padding-top:14px;border-top:1px solid var(--adm-border)}
-        .profile-form{display:grid;gap:18px;max-width:580px}
-        .empty-state{text-align:center;padding:40px 20px;color:var(--adm-muted);font-size:.72rem}
-        .photo-upload-row{display:flex;align-items:center;gap:16px}
-        .photo-preview{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--adm-border);background:var(--adm-surface2);flex-shrink:0}
-        .photo-info{font-size:.68rem;color:var(--adm-muted);line-height:1.6}
-        .toast{position:fixed;bottom:28px;right:28px;background:var(--adm-surface2);border:1px solid var(--adm-border);color:var(--adm-fg);font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:11px 18px;border-radius:5px;z-index:999;display:flex;align-items:center;gap:9px;box-shadow:0 6px 24px rgba(0,0,0,.4);animation:slideUp .22s ease}
-        .toast.ok{border-color:var(--adm-green)}
-        .toast.ok::before{content:'✓';color:var(--adm-green)}
-        .toast.err{border-color:var(--adm-red)}
-        .toast.err::before{content:'✕';color:var(--adm-red)}
+/* ADMIN */
+.admin-overlay{display:none;position:fixed;inset:0;background:var(--adm-bg);z-index:500;overflow:hidden;font-family:'JetBrains Mono',monospace;color:var(--adm-fg)}
+.admin-overlay.open{display:flex;animation:fadeIn .2s ease}
+.admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:20px;padding:40px}
+.login-box{background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:8px;padding:28px;width:100%;max-width:340px;display:flex;flex-direction:column;gap:14px}
+.login-box input{background:var(--adm-bg);border:1px solid var(--adm-border);color:var(--adm-fg);padding:9px 13px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.8rem;outline:none;transition:border-color .2s;width:100%}
+.login-box input:focus{border-color:#5b8af5}
+.login-hint{font-size:.65rem;color:var(--adm-muted);text-align:center}
+.login-error{color:var(--adm-red);font-size:.7rem;text-align:center;min-height:15px}
+.admin-layout{display:flex;width:100%;height:100%}
+.admin-sidebar{width:210px;min-width:210px;background:var(--adm-surface);border-right:1px solid var(--adm-border);display:flex;flex-direction:column;padding:22px 0}
+.sidebar-logo{padding:0 18px 20px;border-bottom:1px solid var(--adm-border);margin-bottom:14px}
+.sl-label{font-size:.62rem;color:var(--adm-muted);letter-spacing:.1em;text-transform:uppercase}
+.sl-name{font-size:.82rem;color:var(--adm-fg);margin-top:2px}
+.sidebar-nav{flex:1;display:flex;flex-direction:column;gap:2px;padding:0 10px}
+.sbtn{background:none;border:none;color:var(--adm-muted);font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.03em;text-align:left;padding:8px 10px;border-radius:4px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:9px}
+.sbtn:hover,.sbtn.active{background:var(--adm-surface2);color:var(--adm-fg)}
+.sbtn .ico{width:14px;text-align:center;font-size:.8rem}
+.sidebar-foot{padding:14px 10px 0;border-top:1px solid var(--adm-border);margin-top:14px}
+.admin-main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.admin-topbar{padding:18px 28px;border-bottom:1px solid var(--adm-border);display:flex;justify-content:space-between;align-items:center;background:var(--adm-surface);position:sticky;top:0;z-index:10}
+.admin-topbar h1{font-size:.8rem;letter-spacing:.07em;text-transform:uppercase}
+.db-status{font-size:.65rem;display:flex;align-items:center;gap:6px}
+.db-dot{width:7px;height:7px;border-radius:50%;background:var(--adm-muted)}
+.db-dot.ok{background:var(--adm-green)}
+.db-dot.err{background:var(--adm-red)}
+.admin-body{padding:28px;flex:1}
+.apanel{display:none}
+.apanel.active{display:block;animation:fadeIn .2s ease}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.sec-label{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--adm-muted)}
+.items-list{display:flex;flex-direction:column;margin-bottom:20px}
+.icard{background:var(--adm-surface);border:1px solid var(--adm-border);border-radius:5px;padding:14px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:7px;transition:border-color .15s}
+.icard:hover{border-color:#5b8af5}
+.icard-info{flex:1;min-width:0}
+.icard-title{font-size:.78rem;color:var(--adm-fg);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.icard-sub{font-size:.66rem;color:var(--adm-muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.icard-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.icard-tag{font-size:.6rem;background:var(--adm-surface2);border:1px solid var(--adm-border);padding:1px 7px;border-radius:2px;color:var(--adm-muted)}
+.icard-actions{display:flex;gap:7px;flex-shrink:0}
+.btn{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:7px 13px;border-radius:4px;border:1px solid;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary{background:#c0392b;border-color:#c0392b;color:#fff}
+.btn-primary:hover:not(:disabled){background:#a93226}
+.btn-ghost{background:transparent;border-color:var(--adm-border);color:var(--adm-muted)}
+.btn-ghost:hover:not(:disabled){border-color:var(--adm-fg);color:var(--adm-fg)}
+.btn-danger{background:transparent;border-color:var(--adm-border);color:var(--adm-red)}
+.btn-danger:hover:not(:disabled){border-color:var(--adm-red);background:rgba(239,68,68,.07)}
+.btn-sm{padding:4px 9px;font-size:.63rem}
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600}
+.drawer-overlay.open{display:flex;justify-content:flex-end;animation:fadeIn .18s ease}
+.drawer{width:500px;max-width:100%;background:var(--adm-surface);height:100%;overflow-y:auto;padding:28px;display:flex;flex-direction:column;gap:18px;animation:slideIn .22s ease}
+.drawer-hdr{display:flex;justify-content:space-between;align-items:center}
+.drawer-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.drawer-close{background:none;border:none;color:var(--adm-muted);font-size:1.1rem;cursor:pointer;padding:3px;transition:color .15s}
+.drawer-close:hover{color:var(--adm-fg)}
+.fgrp{display:flex;flex-direction:column;gap:7px}
+.flbl{font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--adm-muted)}
+.finput,.ftarea,.fselect{background:var(--adm-bg);border:1px solid var(--adm-border);color:var(--adm-fg);padding:9px 13px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.76rem;outline:none;transition:border-color .2s;width:100%}
+.finput:focus,.ftarea:focus,.fselect:focus{border-color:#5b8af5}
+.ftarea{resize:vertical;min-height:110px;line-height:1.6}
+.fhint{font-size:.61rem;color:var(--adm-muted)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dfooter{display:flex;gap:10px;justify-content:flex-end;padding-top:14px;border-top:1px solid var(--adm-border)}
+.profile-form{display:grid;gap:18px;max-width:580px}
+.empty-state{text-align:center;padding:40px 20px;color:var(--adm-muted);font-size:.72rem}
+.photo-upload-row{display:flex;align-items:center;gap:16px}
+.photo-preview{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--adm-border);background:var(--adm-surface2);flex-shrink:0}
+.photo-info{font-size:.68rem;color:var(--adm-muted);line-height:1.6}
+.toast{position:fixed;bottom:28px;right:28px;background:var(--adm-surface2);border:1px solid var(--adm-border);color:var(--adm-fg);font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:11px 18px;border-radius:5px;z-index:999;display:flex;align-items:center;gap:9px;box-shadow:0 6px 24px rgba(0,0,0,.4);animation:slideUp .22s ease}
+.toast.ok{border-color:var(--adm-green)}
+.toast.ok::before{content:'✓';color:var(--adm-green)}
+.toast.err{border-color:var(--adm-red)}
+.toast.err::before{content:'✕';color:var(--adm-red)}
 
-        /* POST EDITOR */
-        .editor-wrap{display:flex;flex-direction:column}
-        .toolbar{display:flex;gap:4px;flex-wrap:wrap;padding:8px 10px;background:var(--adm-surface2);border:1px solid var(--adm-border);border-bottom:none;border-radius:4px 4px 0 0}
-        .toolbar+.ftarea{border-radius:0 0 4px 4px}
-        .tbtn{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:4px 9px;background:var(--adm-surface);border:1px solid var(--adm-border);color:var(--adm-muted);border-radius:3px;cursor:pointer;transition:all .15s;white-space:nowrap}
-        .tbtn:hover{background:var(--adm-bg);color:var(--adm-fg);border-color:var(--adm-muted)}
-        .tbtn-active{background:rgba(192,57,43,.15)!important;border-color:#c0392b!important;color:#c0392b!important}
-        .tbtn-sep{background:none!important;border:none!important;color:var(--adm-border)!important;cursor:default!important;padding:4px 2px!important}
+/* POST EDITOR */
+.editor-wrap{display:flex;flex-direction:column}
+.toolbar{display:flex;gap:4px;flex-wrap:wrap;padding:8px 10px;background:var(--adm-surface2);border:1px solid var(--adm-border);border-bottom:none;border-radius:4px 4px 0 0}
+.toolbar+.ftarea{border-radius:0 0 4px 4px}
+.tbtn{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:4px 9px;background:var(--adm-surface);border:1px solid var(--adm-border);color:var(--adm-muted);border-radius:3px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.tbtn:hover{background:var(--adm-bg);color:var(--adm-fg);border-color:var(--adm-muted)}
+.tbtn-active{background:rgba(192,57,43,.15)!important;border-color:#c0392b!important;color:#c0392b!important}
+.tbtn-sep{background:none!important;border:none!important;color:var(--adm-border)!important;cursor:default!important;padding:4px 2px!important}
 
-        /* IMAGE PANEL */
-        .img-panel{background:var(--adm-surface2);border:1px solid var(--adm-border);border-radius:5px;overflow:hidden}
-        .img-tabs{display:flex;border-bottom:1px solid var(--adm-border);background:var(--adm-surface)}
-        .img-tab{flex:1;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.05em;text-transform:uppercase;padding:10px 8px;background:none;border:none;color:var(--adm-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
-        .img-tab.active{color:var(--adm-fg);border-bottom-color:#c0392b}
-        .img-pane{display:none;padding:14px;flex-direction:column;gap:12px}
-        .img-pane.active{display:flex}
-        .drop-zone{border:2px dashed var(--adm-border);border-radius:5px;padding:24px 16px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-size:.7rem;color:var(--adm-muted);line-height:1.7}
-        .drop-zone:hover,.drop-zone.over{border-color:#c0392b;background:rgba(192,57,43,.05);color:var(--adm-fg)}
-        .preview-row{display:flex;gap:10px;align-items:center;background:var(--adm-bg);border:1px solid var(--adm-border);border-radius:4px;padding:8px 10px}
-        .preview-thumb{width:48px;height:48px;object-fit:cover;border-radius:3px;flex-shrink:0}
-        .preview-url{font-size:.63rem;color:var(--adm-muted);word-break:break-all;flex:1}
-        .progress{height:3px;background:var(--adm-border);border-radius:2px;overflow:hidden;margin-top:4px}
-        .progress-bar{height:100%;background:#c0392b;width:0%;transition:width .3s}
-        .caption-row{display:flex;gap:8px;align-items:center}
-        .img-status{font-size:.65rem;color:var(--adm-muted);min-height:16px}
-        .img-status.ok{color:var(--adm-green)}
-        .img-status.err{color:var(--adm-red)}
+/* IMAGE PANEL */
+.img-panel{background:var(--adm-surface2);border:1px solid var(--adm-border);border-radius:5px;overflow:hidden}
+.img-tabs{display:flex;border-bottom:1px solid var(--adm-border);background:var(--adm-surface)}
+.img-tab{flex:1;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.05em;text-transform:uppercase;padding:10px 8px;background:none;border:none;color:var(--adm-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.img-tab.active{color:var(--adm-fg);border-bottom-color:#c0392b}
+.img-pane{display:none;padding:14px;flex-direction:column;gap:12px}
+.img-pane.active{display:flex}
+.drop-zone{border:2px dashed var(--adm-border);border-radius:5px;padding:24px 16px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-size:.7rem;color:var(--adm-muted);line-height:1.7}
+.drop-zone:hover,.drop-zone.over{border-color:#c0392b;background:rgba(192,57,43,.05);color:var(--adm-fg)}
+.preview-row{display:flex;gap:10px;align-items:center;background:var(--adm-bg);border:1px solid var(--adm-border);border-radius:4px;padding:8px 10px}
+.preview-thumb{width:48px;height:48px;object-fit:cover;border-radius:3px;flex-shrink:0}
+.preview-url{font-size:.63rem;color:var(--adm-muted);word-break:break-all;flex:1}
+.progress{height:3px;background:var(--adm-border);border-radius:2px;overflow:hidden;margin-top:4px}
+.progress-bar{height:100%;background:#c0392b;width:0%;transition:width .3s}
+.caption-row{display:flex;gap:8px;align-items:center}
+.img-status{font-size:.65rem;color:var(--adm-muted);min-height:16px}
+.img-status.ok{color:var(--adm-green)}
+.img-status.err{color:var(--adm-red)}
 
-        @media(max-width:700px){.home-body{grid-template-columns:1fr}.home-photo-wrap{order:-1}.home-photo,.home-photo-placeholder{width:140px;height:140px}.project-row{grid-template-columns:1fr;gap:4px}.project-tags{justify-content:flex-start}#site-header{gap:12px}.site-name{font-size:1.6rem}.admin-sidebar{display:none}.frow{grid-template-columns:1fr}.drawer{width:100%}}
-    </style>
+@media(max-width:700px){.home-body{grid-template-columns:1fr}.home-photo-wrap{order:-1}.home-photo,.home-photo-placeholder{width:140px;height:140px}.project-row{grid-template-columns:1fr;gap:4px}.project-tags{justify-content:flex-start}#site-header{gap:12px}.site-name{font-size:1.6rem}.admin-sidebar{display:none}.frow{grid-template-columns:1fr}.drawer{width:100%}}
+
+/* skeleton shimmer for loading state */
+.skel{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;border-radius:3px;display:inline-block}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style>
 </head>
 <body>
-<div class="wrap" id="mainWrap" style="opacity:0;transition:opacity .15s ease">
+<div class="wrap" id="mainWrap">
 
-    <header id="site-header">
-        <a class="site-name" href="#home" id="hdrName"></a>
-        <nav class="site-nav">
-            <a href="#home"       id="nav-home">Home</a>
-            <a href="#projects"   id="nav-projects">Projects</a>
-            <a href="#experience" id="nav-experience">Experience</a>
-            <a href="#blog"       id="nav-blog">Blog</a>
-            <a href="https://cv.shlokkakade.com" target="_blank" rel="noopener">Resume</a>
-        </nav>
-    </header>
+  <header id="site-header">
+    <a class="site-name" href="#home" id="hdrName"></a>
+    <nav class="site-nav">
+      <a href="#home"       id="nav-home">Home</a>
+      <a href="#projects"   id="nav-projects">Projects</a>
+      <a href="#experience" id="nav-experience">Experience</a>
+      <a href="#blog"       id="nav-blog">Blog</a>
+      <a href="https://cv.shlokkakade.com" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </header>
 
-    <!-- HOME -->
-    <div class="page" id="page-home">
-        <div class="home-tagline" id="homeTagline"></div>
-        <div class="home-body">
-            <div>
-                <div class="home-text" id="homeAbout"></div>
-                <div class="home-links" id="homeLinks"></div>
-                <div class="home-posts-section" id="homePostsSection" style="display:none">
-                    <div class="home-posts-title">Blog posts</div>
-                    <div id="homePostsList"></div>
-                </div>
-            </div>
-            <div class="home-photo-wrap" id="photoWrap">
-                <div class="home-photo-placeholder" id="photoPlaceholder" onclick="openAdmin()">
-                    <span class="ph-icon">◎</span>
-                    <span>Add photo<br>in admin</span>
-                </div>
-            </div>
+  <!-- HOME -->
+  <div class="page" id="page-home">
+    <div class="home-tagline" id="homeTagline"><span class="skel" style="width:340px;height:2rem">&nbsp;</span></div>
+    <div class="home-body">
+      <div>
+        <div class="home-text" id="homeAbout"><span class="skel" style="width:100%;height:1em;margin-bottom:.7em;display:block">&nbsp;</span><span class="skel" style="width:80%;height:1em;display:block">&nbsp;</span></div>
+        <div class="home-links" id="homeLinks"></div>
+        <div class="home-posts-section" id="homePostsSection" style="display:none">
+          <div class="home-posts-title">Blog posts</div>
+          <div id="homePostsList"></div>
         </div>
+      </div>
+      <div class="home-photo-wrap" id="photoWrap">
+        <div class="home-photo-placeholder" id="photoPlaceholder" onclick="openAdmin()">
+          <span class="ph-icon">◎</span>
+          <span>Add photo<br>in admin</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- PROJECTS -->
-    <div class="page" id="page-projects">
-        <div class="page-title">Projects</div>
-        <div id="projectsContent"></div>
-    </div>
+  <!-- PROJECTS -->
+  <div class="page" id="page-projects">
+    <div class="page-title">Projects</div>
+    <div id="projectsContent"><span class="skel" style="width:100%;height:1.2em;display:block;margin-bottom:12px">&nbsp;</span><span class="skel" style="width:85%;height:1.2em;display:block;margin-bottom:12px">&nbsp;</span><span class="skel" style="width:90%;height:1.2em;display:block">&nbsp;</span></div>
+  </div>
 
-    <!-- EXPERIENCE -->
-    <div class="page" id="page-experience">
-        <div class="page-title">Experience</div>
-        <div id="experienceContent"></div>
-    </div>
+  <!-- EXPERIENCE -->
+  <div class="page" id="page-experience">
+    <div class="page-title">Experience</div>
+    <div id="experienceContent"><span class="skel" style="width:100%;height:1.2em;display:block;margin-bottom:12px">&nbsp;</span><span class="skel" style="width:70%;height:1.2em;display:block">&nbsp;</span></div>
+  </div>
 
-    <!-- BLOG LIST -->
-    <div class="page" id="page-blog">
-        <div class="page-title">Blog</div>
-        <div id="blogContent"></div>
-    </div>
+  <!-- BLOG LIST -->
+  <div class="page" id="page-blog">
+    <div class="page-title">Blog</div>
+    <div id="blogContent"><span class="skel" style="width:100%;height:1.2em;display:block;margin-bottom:12px">&nbsp;</span><span class="skel" style="width:75%;height:1.2em;display:block">&nbsp;</span></div>
+  </div>
 
-    <!-- BLOG POST -->
-    <div class="page" id="page-post">
-        <a class="post-back" href="#blog">← Blog</a>
-        <div class="post-page-date" id="postPageDate"></div>
-        <h1 class="post-page-title" id="postPageTitle"></h1>
-        <div class="post-content" id="postPageBody"></div>
-    </div>
+  <!-- BLOG POST -->
+  <div class="page" id="page-post">
+    <a class="post-back" href="#blog">← Blog</a>
+    <div class="post-page-date" id="postPageDate"></div>
+    <h1 class="post-page-title" id="postPageTitle"></h1>
+    <div class="post-content" id="postPageBody"></div>
+  </div>
 
-    <footer id="site-footer">
-        <span class="footer-copy" id="footerCopy"></span>
-        <button class="admin-trigger" onclick="openAdmin()">⚙ admin</button>
-    </footer>
+  <footer id="site-footer">
+    <span class="footer-copy" id="footerCopy"></span>
+    <button class="admin-trigger" onclick="openAdmin()">⚙ admin</button>
+  </footer>
 </div>
 
 <!-- ═══ ADMIN ═══ -->
 <div class="admin-overlay" id="adminOverlay">
 
-    <div class="admin-login" id="adminLogin">
-        <div style="font-size:.68rem;color:var(--adm-muted);letter-spacing:.1em;text-transform:uppercase">Portfolio Admin</div>
-        <div class="login-box">
-            <input type="password" id="loginPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
-            <button class="btn btn-primary" onclick="doLogin()">Unlock →</button>
-            <div class="login-error" id="loginError"></div>
+  <div class="admin-login" id="adminLogin">
+    <div style="font-size:.68rem;color:var(--adm-muted);letter-spacing:.1em;text-transform:uppercase">Portfolio Admin</div>
+    <div class="login-box">
+      <input type="password" id="loginPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="btn btn-primary" onclick="doLogin()">Unlock →</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+    <div class="login-hint">Default: <strong>admin</strong> · Esc to close</div>
+  </div>
+
+  <div class="admin-layout" id="adminUI" style="display:none;width:100%">
+    <aside class="admin-sidebar">
+      <div class="sidebar-logo">
+        <div class="sl-label">CMS</div>
+        <div class="sl-name" id="sidebarName">—</div>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="sbtn active" onclick="showAPanel('profile')"    id="abtn-profile">   <span class="ico">◈</span>Profile</button>
+        <button class="sbtn"        onclick="showAPanel('projects')"   id="abtn-projects">  <span class="ico">◻</span>Projects</button>
+        <button class="sbtn"        onclick="showAPanel('experience')" id="abtn-experience"><span class="ico">◑</span>Experience</button>
+        <button class="sbtn"        onclick="showAPanel('blog')"       id="abtn-blog">      <span class="ico">✦</span>Blog Posts</button>
+        <button class="sbtn"        onclick="showAPanel('links')"      id="abtn-links">     <span class="ico">↗</span>Links</button>
+      </nav>
+      <div class="sidebar-foot">
+        <button class="sbtn" onclick="closeAdmin()" style="color:var(--adm-green)"><span class="ico">◉</span>View Site</button>
+        <button class="sbtn" onclick="closeAdmin()"><span class="ico">←</span>Exit</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 id="aPanelTitle">Profile</h1>
+        <div class="db-status"><span class="db-dot" id="dbDot"></span><span id="dbLabel" style="color:var(--adm-muted)">Connecting…</span></div>
+      </div>
+      <div class="admin-body">
+
+        <!-- PROFILE -->
+        <div class="apanel active" id="apanel-profile">
+          <div class="profile-form">
+            <div class="fgrp"><label class="flbl">Full Name</label><input class="finput" id="pf-name" placeholder="Your Name"></div>
+            <div class="fgrp"><label class="flbl">Tagline</label><input class="finput" id="pf-tagline" placeholder="Developer / Tinkerer / Builder"></div>
+            <div class="fgrp"><label class="flbl">Email</label><input class="finput" id="pf-email" placeholder="you@example.com"></div>
+            <div class="fgrp">
+              <label class="flbl">Photo URL</label>
+              <div class="photo-upload-row">
+                <img class="photo-preview" id="photoPreview" src="" alt="" style="display:none">
+                <div style="flex:1">
+                  <input class="finput" id="pf-photo" placeholder="https://... paste a direct image URL" oninput="previewPhoto()">
+                  <div class="photo-info" style="margin-top:6px">Displays as a grayscale circle. Paste any direct image link.</div>
+                </div>
+              </div>
+            </div>
+            <div class="fgrp">
+              <label class="flbl">About (HTML)</label>
+              <textarea class="ftarea" style="min-height:160px" id="pf-about"></textarea>
+              <div class="fhint">Use &lt;p&gt; &lt;em&gt; &lt;strong&gt; &lt;a href="..."&gt;</div>
+            </div>
+            <div><button class="btn btn-primary" id="saveProfileBtn" onclick="saveProfile()">Save Profile</button></div>
+          </div>
         </div>
-        <div class="login-hint">Default: <strong>admin</strong> · Esc to close</div>
-    </div>
 
-    <div class="admin-layout" id="adminUI" style="display:none;width:100%">
-        <aside class="admin-sidebar">
-            <div class="sidebar-logo">
-                <div class="sl-label">CMS</div>
-                <div class="sl-name" id="sidebarName">—</div>
-            </div>
-            <nav class="sidebar-nav">
-                <button class="sbtn active" onclick="showAPanel('profile')"    id="abtn-profile">   <span class="ico">◈</span>Profile</button>
-                <button class="sbtn"        onclick="showAPanel('projects')"   id="abtn-projects">  <span class="ico">◻</span>Projects</button>
-                <button class="sbtn"        onclick="showAPanel('experience')" id="abtn-experience"><span class="ico">◑</span>Experience</button>
-                <button class="sbtn"        onclick="showAPanel('blog')"       id="abtn-blog">      <span class="ico">✦</span>Blog Posts</button>
-                <button class="sbtn"        onclick="showAPanel('links')"      id="abtn-links">     <span class="ico">↗</span>Links</button>
-            </nav>
-            <div class="sidebar-foot">
-                <button class="sbtn" onclick="closeAdmin()" style="color:var(--adm-green)"><span class="ico">◉</span>View Site</button>
-                <button class="sbtn" onclick="closeAdmin()"><span class="ico">←</span>Exit</button>
-            </div>
-        </aside>
+        <!-- PROJECTS -->
+        <div class="apanel" id="apanel-projects">
+          <div class="sec-hdr"><span class="sec-label" id="projCount"></span><button class="btn btn-primary" onclick="openProjectDrawer()">+ Add Project</button></div>
+          <div class="items-list" id="adminProjectsList"></div>
+        </div>
 
-        <main class="admin-main">
-            <div class="admin-topbar">
-                <h1 id="aPanelTitle">Profile</h1>
-                <div class="db-status"><span class="db-dot" id="dbDot"></span><span id="dbLabel" style="color:var(--adm-muted)">Connecting…</span></div>
-            </div>
-            <div class="admin-body">
+        <!-- EXPERIENCE -->
+        <div class="apanel" id="apanel-experience">
+          <div class="sec-hdr"><span class="sec-label" id="expCount"></span><button class="btn btn-primary" onclick="openExpDrawer()">+ Add Experience</button></div>
+          <div class="items-list" id="adminExpList"></div>
+        </div>
 
-                <!-- PROFILE -->
-                <div class="apanel active" id="apanel-profile">
-                    <div class="profile-form">
-                        <div class="fgrp"><label class="flbl">Full Name</label><input class="finput" id="pf-name" placeholder="Your Name"></div>
-                        <div class="fgrp"><label class="flbl">Tagline</label><input class="finput" id="pf-tagline" placeholder="Developer / Tinkerer / Builder"></div>
-                        <div class="fgrp"><label class="flbl">Email</label><input class="finput" id="pf-email" placeholder="you@example.com"></div>
-                        <div class="fgrp">
-                            <label class="flbl">Photo URL</label>
-                            <div class="photo-upload-row">
-                                <img class="photo-preview" id="photoPreview" src="" alt="" style="display:none">
-                                <div style="flex:1">
-                                    <input class="finput" id="pf-photo" placeholder="https://... paste a direct image URL" oninput="previewPhoto()">
-                                    <div class="photo-info" style="margin-top:6px">Displays as a grayscale circle. Paste any direct image link.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fgrp">
-                            <label class="flbl">About (HTML)</label>
-                            <textarea class="ftarea" style="min-height:160px" id="pf-about"></textarea>
-                            <div class="fhint">Use &lt;p&gt; &lt;em&gt; &lt;strong&gt; &lt;a href="..."&gt;</div>
-                        </div>
-                        <div><button class="btn btn-primary" id="saveProfileBtn" onclick="saveProfile()">Save Profile</button></div>
-                    </div>
-                </div>
+        <!-- BLOG -->
+        <div class="apanel" id="apanel-blog">
+          <div class="sec-hdr"><span class="sec-label" id="blogCount"></span><button class="btn btn-primary" onclick="openPostDrawer()">+ New Post</button></div>
+          <div class="items-list" id="adminBlogList"></div>
+        </div>
 
-                <!-- PROJECTS -->
-                <div class="apanel" id="apanel-projects">
-                    <div class="sec-hdr"><span class="sec-label" id="projCount"></span><button class="btn btn-primary" onclick="openProjectDrawer()">+ Add Project</button></div>
-                    <div class="items-list" id="adminProjectsList"></div>
-                </div>
+        <!-- LINKS -->
+        <div class="apanel" id="apanel-links">
+          <div style="max-width:460px;display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:.66rem;color:var(--adm-muted)">Links shown on the home page below your bio.</div>
+            <div id="linksEditor"></div>
+            <button class="btn btn-ghost btn-sm" onclick="addLinkRow()">+ Add Link</button>
+            <div><button class="btn btn-primary" onclick="saveLinks()">Save Links</button></div>
+          </div>
+        </div>
 
-                <!-- EXPERIENCE -->
-                <div class="apanel" id="apanel-experience">
-                    <div class="sec-hdr"><span class="sec-label" id="expCount"></span><button class="btn btn-primary" onclick="openExpDrawer()">+ Add Experience</button></div>
-                    <div class="items-list" id="adminExpList"></div>
-                </div>
-
-                <!-- BLOG -->
-                <div class="apanel" id="apanel-blog">
-                    <div class="sec-hdr"><span class="sec-label" id="blogCount"></span><button class="btn btn-primary" onclick="openPostDrawer()">+ New Post</button></div>
-                    <div class="items-list" id="adminBlogList"></div>
-                </div>
-
-                <!-- LINKS -->
-                <div class="apanel" id="apanel-links">
-                    <div style="max-width:460px;display:flex;flex-direction:column;gap:14px">
-                        <div style="font-size:.66rem;color:var(--adm-muted)">Links shown on the home page below your bio.</div>
-                        <div id="linksEditor"></div>
-                        <button class="btn btn-ghost btn-sm" onclick="addLinkRow()">+ Add Link</button>
-                        <div><button class="btn btn-primary" onclick="saveLinks()">Save Links</button></div>
-                    </div>
-                </div>
-
-            </div>
-        </main>
-    </div>
+      </div>
+    </main>
+  </div>
 </div>
 
 <!-- ═══ DRAWERS ═══ -->
 <div class="drawer-overlay" id="projectDrawer">
-    <div class="drawer">
-        <div class="drawer-hdr"><span class="drawer-title" id="projDrawerTitle">Add Project</span><button class="drawer-close" onclick="closeDrawer('projectDrawer')">✕</button></div>
-        <div class="fgrp"><label class="flbl">Name</label><input class="finput" id="pd-name" placeholder="my-project"></div>
-        <div class="fgrp"><label class="flbl">Description</label><input class="finput" id="pd-desc" placeholder="What does it do?"></div>
-        <div class="fgrp"><label class="flbl">URL (optional)</label><input class="finput" id="pd-url" placeholder="https://github.com/..."></div>
-        <div class="fgrp"><label class="flbl">Tags (comma-separated)</label><input class="finput" id="pd-tags" placeholder="go, postgres, cli"></div>
-        <div class="dfooter">
-            <button class="btn btn-ghost" onclick="closeDrawer('projectDrawer')">Cancel</button>
-            <button class="btn btn-primary" id="saveProjectBtn" onclick="saveProject()">Save</button>
-        </div>
+  <div class="drawer">
+    <div class="drawer-hdr"><span class="drawer-title" id="projDrawerTitle">Add Project</span><button class="drawer-close" onclick="closeDrawer('projectDrawer')">✕</button></div>
+    <div class="fgrp"><label class="flbl">Name</label><input class="finput" id="pd-name" placeholder="my-project"></div>
+    <div class="fgrp"><label class="flbl">Description</label><input class="finput" id="pd-desc" placeholder="What does it do?"></div>
+    <div class="fgrp"><label class="flbl">URL (optional)</label><input class="finput" id="pd-url" placeholder="https://github.com/..."></div>
+    <div class="fgrp"><label class="flbl">Tags (comma-separated)</label><input class="finput" id="pd-tags" placeholder="go, postgres, cli"></div>
+    <div class="dfooter">
+      <button class="btn btn-ghost" onclick="closeDrawer('projectDrawer')">Cancel</button>
+      <button class="btn btn-primary" id="saveProjectBtn" onclick="saveProject()">Save</button>
     </div>
+  </div>
 </div>
 
 <div class="drawer-overlay" id="expDrawer">
-    <div class="drawer">
-        <div class="drawer-hdr"><span class="drawer-title" id="expDrawerTitle">Add Experience</span><button class="drawer-close" onclick="closeDrawer('expDrawer')">✕</button></div>
-        <div class="fgrp"><label class="flbl">Role / Title</label><input class="finput" id="ed-role" placeholder="Senior Engineer"></div>
-        <div class="fgrp"><label class="flbl">Company</label><input class="finput" id="ed-company" placeholder="Acme Corp"></div>
-        <div class="frow">
-            <div class="fgrp"><label class="flbl">Start</label><input class="finput" id="ed-start" placeholder="Jan 2022"></div>
-            <div class="fgrp"><label class="flbl">End</label><input class="finput" id="ed-end" placeholder="Present"></div>
-        </div>
-        <div class="fgrp"><label class="flbl">Description</label><textarea class="ftarea" id="ed-desc" placeholder="What did you work on?"></textarea></div>
-        <div class="dfooter">
-            <button class="btn btn-ghost" onclick="closeDrawer('expDrawer')">Cancel</button>
-            <button class="btn btn-primary" id="saveExpBtn" onclick="saveExp()">Save</button>
-        </div>
+  <div class="drawer">
+    <div class="drawer-hdr"><span class="drawer-title" id="expDrawerTitle">Add Experience</span><button class="drawer-close" onclick="closeDrawer('expDrawer')">✕</button></div>
+    <div class="fgrp"><label class="flbl">Role / Title</label><input class="finput" id="ed-role" placeholder="Senior Engineer"></div>
+    <div class="fgrp"><label class="flbl">Company</label><input class="finput" id="ed-company" placeholder="Acme Corp"></div>
+    <div class="frow">
+      <div class="fgrp"><label class="flbl">Start</label><input class="finput" id="ed-start" placeholder="Jan 2022"></div>
+      <div class="fgrp"><label class="flbl">End</label><input class="finput" id="ed-end" placeholder="Present"></div>
     </div>
+    <div class="fgrp"><label class="flbl">Description</label><textarea class="ftarea" id="ed-desc" placeholder="What did you work on?"></textarea></div>
+    <div class="dfooter">
+      <button class="btn btn-ghost" onclick="closeDrawer('expDrawer')">Cancel</button>
+      <button class="btn btn-primary" id="saveExpBtn" onclick="saveExp()">Save</button>
+    </div>
+  </div>
 </div>
 
 <!-- POST DRAWER — wider for the editor -->
 <div class="drawer-overlay" id="postDrawer">
-    <div class="drawer" style="width:600px">
-        <div class="drawer-hdr"><span class="drawer-title" id="postDrawerTitle">New Post</span><button class="drawer-close" onclick="closeDrawer('postDrawer')">✕</button></div>
-        <div class="fgrp"><label class="flbl">Title</label><input class="finput" id="bd-title" placeholder="Post title"></div>
-        <div class="frow">
-            <div class="fgrp"><label class="flbl">Date</label><input class="finput" id="bd-date" placeholder="Jan 2025"></div>
-            <div class="fgrp"><label class="flbl">Status</label>
-                <select class="fselect" id="bd-status"><option value="published">Published</option><option value="draft">Draft</option></select>
-            </div>
-        </div>
-
-        <!-- Toolbar + textarea -->
-        <div class="fgrp">
-            <label class="flbl">Body (HTML)</label>
-            <div class="editor-wrap">
-                <div class="toolbar">
-                    <button class="tbtn" onclick="wrapSel('bd-body','&lt;p&gt;','&lt;/p&gt;')">p</button>
-                    <button class="tbtn" onclick="wrapSel('bd-body','&lt;h2&gt;','&lt;/h2&gt;')">H2</button>
-                    <button class="tbtn" onclick="wrapSel('bd-body','&lt;strong&gt;','&lt;/strong&gt;')"><b>B</b></button>
-                    <button class="tbtn" onclick="wrapSel('bd-body','&lt;em&gt;','&lt;/em&gt;')"><i>I</i></button>
-                    <button class="tbtn" onclick="doInsertLink()">link</button>
-                    <span class="tbtn tbtn-sep">|</span>
-                    <button class="tbtn" onclick="wrapSel('bd-body','&lt;blockquote&gt;','&lt;/blockquote&gt;')">" quote</button>
-                    <button class="tbtn" onclick="wrapSel('bd-body','&lt;pre&gt;&lt;code&gt;','&lt;/code&gt;&lt;/pre&gt;')">code</button>
-                    <button class="tbtn" onclick="wrapSel('bd-body','&lt;ul&gt;\n  &lt;li&gt;','&lt;/li&gt;\n&lt;/ul&gt;')">list</button>
-                    <span class="tbtn tbtn-sep">|</span>
-                    <button class="tbtn" id="imgToggleBtn" onclick="toggleImgPanel()">🖼 image</button>
-                </div>
-                <textarea class="ftarea" id="bd-body" style="min-height:240px;border-radius:0 0 4px 4px" placeholder="&lt;p&gt;Write your post here...&lt;/p&gt;"></textarea>
-            </div>
-            <div class="fhint">Select text then click a toolbar button, or type HTML directly.</div>
-        </div>
-
-        <!-- Image insert panel -->
-        <div class="img-panel" id="imgPanel" style="display:none">
-            <div class="img-tabs">
-                <button class="img-tab active" id="tab-upload" onclick="switchImgTab('upload')">↑ Upload File</button>
-                <button class="img-tab"        id="tab-url"    onclick="switchImgTab('url')">🔗 Paste URL</button>
-            </div>
-
-            <!-- Upload pane — converts to base64, no storage bucket needed -->
-            <div class="img-pane active" id="pane-upload">
-                <label class="drop-zone" id="dropZone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="onDrop(event)">
-                    <input type="file" id="fileInput" accept="image/*" onchange="onFileChosen(this.files[0])">
-                    <div><strong>Click to browse</strong> or drag an image here</div>
-                    <div style="font-size:.62rem;margin-top:4px;color:var(--adm-muted)">JPG · PNG · GIF · WebP · Embedded directly into post</div>
-                </label>
-                <div class="progress" id="uploadProgress" style="display:none"><div class="progress-bar" id="uploadBar"></div></div>
-                <div id="uploadPreview" style="display:none">
-                    <div class="preview-row">
-                        <img class="preview-thumb" id="uploadThumb" src="" alt="">
-                        <span class="preview-url" id="uploadUrl" style="font-size:.63rem;color:var(--adm-muted)">Ready to insert</span>
-                    </div>
-                    <div class="caption-row" style="margin-top:8px">
-                        <input class="finput" id="uploadCaption" placeholder="Caption (optional)">
-                        <button class="btn btn-primary btn-sm" onclick="insertFromUpload()" style="flex-shrink:0">Insert →</button>
-                    </div>
-                </div>
-                <div class="img-status" id="uploadStatus"></div>
-            </div>
-
-            <!-- URL pane -->
-            <div class="img-pane" id="pane-url">
-                <div class="fgrp">
-                    <label class="flbl">Image URL</label>
-                    <input class="finput" id="urlInput" placeholder="https://example.com/photo.jpg" oninput="previewUrlImg()">
-                </div>
-                <div class="preview-row" id="urlPreview" style="display:none">
-                    <img class="preview-thumb" id="urlThumb" src="" alt="" onerror="this.style.opacity='.3'">
-                    <span class="preview-url" id="urlDisplay"></span>
-                </div>
-                <div class="caption-row" style="margin-top:4px">
-                    <input class="finput" id="urlCaption" placeholder="Caption (optional)">
-                    <button class="btn btn-primary btn-sm" onclick="insertFromUrl()" style="flex-shrink:0">Insert →</button>
-                </div>
-                <div class="img-status" id="urlStatus"></div>
-            </div>
-        </div>
-
-        <div class="dfooter">
-            <button class="btn btn-ghost" onclick="closeDrawer('postDrawer')">Cancel</button>
-            <button class="btn btn-primary" id="savePostBtn" onclick="savePost()">Save Post</button>
-        </div>
+  <div class="drawer" style="width:600px">
+    <div class="drawer-hdr"><span class="drawer-title" id="postDrawerTitle">New Post</span><button class="drawer-close" onclick="closeDrawer('postDrawer')">✕</button></div>
+    <div class="fgrp"><label class="flbl">Title</label><input class="finput" id="bd-title" placeholder="Post title"></div>
+    <div class="frow">
+      <div class="fgrp"><label class="flbl">Date</label><input class="finput" id="bd-date" placeholder="Jan 2025"></div>
+      <div class="fgrp"><label class="flbl">Status</label>
+        <select class="fselect" id="bd-status"><option value="published">Published</option><option value="draft">Draft</option></select>
+      </div>
     </div>
+
+    <!-- Toolbar + textarea -->
+    <div class="fgrp">
+      <label class="flbl">Body (HTML)</label>
+      <div class="editor-wrap">
+        <div class="toolbar">
+          <button class="tbtn" onclick="wrapSel('bd-body','&lt;p&gt;','&lt;/p&gt;')">p</button>
+          <button class="tbtn" onclick="wrapSel('bd-body','&lt;h2&gt;','&lt;/h2&gt;')">H2</button>
+          <button class="tbtn" onclick="wrapSel('bd-body','&lt;strong&gt;','&lt;/strong&gt;')"><b>B</b></button>
+          <button class="tbtn" onclick="wrapSel('bd-body','&lt;em&gt;','&lt;/em&gt;')"><i>I</i></button>
+          <button class="tbtn" onclick="doInsertLink()">link</button>
+          <span class="tbtn tbtn-sep">|</span>
+          <button class="tbtn" onclick="wrapSel('bd-body','&lt;blockquote&gt;','&lt;/blockquote&gt;')">" quote</button>
+          <button class="tbtn" onclick="wrapSel('bd-body','&lt;pre&gt;&lt;code&gt;','&lt;/code&gt;&lt;/pre&gt;')">code</button>
+          <button class="tbtn" onclick="wrapSel('bd-body','&lt;ul&gt;\n  &lt;li&gt;','&lt;/li&gt;\n&lt;/ul&gt;')">list</button>
+          <span class="tbtn tbtn-sep">|</span>
+          <button class="tbtn" id="imgToggleBtn" onclick="toggleImgPanel()">🖼 image</button>
+        </div>
+        <textarea class="ftarea" id="bd-body" style="min-height:240px;border-radius:0 0 4px 4px" placeholder="&lt;p&gt;Write your post here...&lt;/p&gt;"></textarea>
+      </div>
+      <div class="fhint">Select text then click a toolbar button, or type HTML directly.</div>
+    </div>
+
+    <!-- Image insert panel -->
+    <div class="img-panel" id="imgPanel" style="display:none">
+      <div class="img-tabs">
+        <button class="img-tab active" id="tab-upload" onclick="switchImgTab('upload')">↑ Upload File</button>
+        <button class="img-tab"        id="tab-url"    onclick="switchImgTab('url')">🔗 Paste URL</button>
+      </div>
+
+      <!-- Upload pane — converts to base64, no storage bucket needed -->
+      <div class="img-pane active" id="pane-upload">
+        <label class="drop-zone" id="dropZone" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="onDrop(event)">
+          <input type="file" id="fileInput" accept="image/*" onchange="onFileChosen(this.files[0])">
+          <div><strong>Click to browse</strong> or drag an image here</div>
+          <div style="font-size:.62rem;margin-top:4px;color:var(--adm-muted)">JPG · PNG · GIF · WebP · Embedded directly into post</div>
+        </label>
+        <div class="progress" id="uploadProgress" style="display:none"><div class="progress-bar" id="uploadBar"></div></div>
+        <div id="uploadPreview" style="display:none">
+          <div class="preview-row">
+            <img class="preview-thumb" id="uploadThumb" src="" alt="">
+            <span class="preview-url" id="uploadUrl" style="font-size:.63rem;color:var(--adm-muted)">Ready to insert</span>
+          </div>
+          <div class="caption-row" style="margin-top:8px">
+            <input class="finput" id="uploadCaption" placeholder="Caption (optional)">
+            <button class="btn btn-primary btn-sm" onclick="insertFromUpload()" style="flex-shrink:0">Insert →</button>
+          </div>
+        </div>
+        <div class="img-status" id="uploadStatus"></div>
+      </div>
+
+      <!-- URL pane -->
+      <div class="img-pane" id="pane-url">
+        <div class="fgrp">
+          <label class="flbl">Image URL</label>
+          <input class="finput" id="urlInput" placeholder="https://example.com/photo.jpg" oninput="previewUrlImg()">
+        </div>
+        <div class="preview-row" id="urlPreview" style="display:none">
+          <img class="preview-thumb" id="urlThumb" src="" alt="" onerror="this.style.opacity='.3'">
+          <span class="preview-url" id="urlDisplay"></span>
+        </div>
+        <div class="caption-row" style="margin-top:4px">
+          <input class="finput" id="urlCaption" placeholder="Caption (optional)">
+          <button class="btn btn-primary btn-sm" onclick="insertFromUrl()" style="flex-shrink:0">Insert →</button>
+        </div>
+        <div class="img-status" id="urlStatus"></div>
+      </div>
+    </div>
+
+    <div class="dfooter">
+      <button class="btn btn-ghost" onclick="closeDrawer('postDrawer')">Cancel</button>
+      <button class="btn btn-primary" id="savePostBtn" onclick="savePost()">Save Post</button>
+    </div>
+  </div>
 </div>
 
 <script>
-    // ═══ SUPABASE ═══════════════════════════════════════
-    const SB_URL = 'https://bdmkukcgvamrjvunibkc.supabase.co';
-    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkbWt1a2NndmFtcmp2dW5pYmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzQyNjEsImV4cCI6MjA4NzcxMDI2MX0.KqGKD2RJlQi25ee83n64TpWTaq6Sax50H_aVjhD_pnE';
-    const SBH   = {'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=representation'};
+// ═══ SUPABASE ═══════════════════════════════════════
+const SB_URL = 'https://bdmkukcgvamrjvunibkc.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkbWt1a2NndmFtcmp2dW5pYmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzQyNjEsImV4cCI6MjA4NzcxMDI2MX0.KqGKD2RJlQi25ee83n64TpWTaq6Sax50H_aVjhD_pnE';
+const SBH   = {'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=representation'};
 
-    async function sbFetch(method, table, body, q) {
-      const res = await fetch(SB_URL+'/rest/v1/'+table+(q||'?select=*'), {method, headers:SBH, body:body?JSON.stringify(body):undefined});
-      if (!res.ok) throw new Error(res.status+': '+await res.text());
-      const t = await res.text(); return t ? JSON.parse(t) : null;
-    }
-    const dbGet    = (t,q)   => sbFetch('GET',   t,null,q);
-    const dbPost   = (t,d)   => sbFetch('POST',  t,d);
-    const dbPatch  = (t,d,q) => sbFetch('PATCH', t,d,q);
-    const dbDelete = (t,q)   => sbFetch('DELETE',t,null,q);
+async function sbFetch(method, table, body, q) {
+  const res = await fetch(SB_URL+'/rest/v1/'+table+(q||'?select=*'), {method, headers:SBH, body:body?JSON.stringify(body):undefined});
+  if (!res.ok) throw new Error(res.status+': '+await res.text());
+  const t = await res.text(); return t ? JSON.parse(t) : null;
+}
+const dbGet    = (t,q)   => sbFetch('GET',   t,null,q);
+const dbPost   = (t,d)   => sbFetch('POST',  t,d);
+const dbPatch  = (t,d,q) => sbFetch('PATCH', t,d,q);
+const dbDelete = (t,q)   => sbFetch('DELETE',t,null,q);
 
-    // ═══ STATE ══════════════════════════════════════════
-    let D = {profile:{}, projects:[], experience:[], posts:[], links:[]};
-    let editProject=null, editExp=null, editPost=null;
-    let dbOk=false, adminUnlocked=false;
-    const PASS = localStorage.getItem('ptf_pass')||'admin';
+// ═══ STATE ══════════════════════════════════════════
+let D = {profile:{}, projects:[], experience:[], posts:[], links:[]};
+let editProject=null, editExp=null, editPost=null;
+let dbOk=false, adminUnlocked=false;
+const PASS = localStorage.getItem('ptf_pass')||'admin';
 
-    // ═══ ROUTER ═════════════════════════════════════════
-    const PAGES = ['home','projects','experience','blog','post'];
-    const NAVS  = ['home','projects','experience','blog'];
+// ═══ ROUTER ═════════════════════════════════════════
+const PAGES = ['home','projects','experience','blog','post'];
+const NAVS  = ['home','projects','experience','blog'];
 
-    function getRoute() {
-      const h = location.hash.slice(1);
-      if (!h || h==='home') return {page:'home', id:null};
-      if (h.startsWith('post/')) return {page:'post', id:+h.split('/')[1]};
-      if (PAGES.includes(h)) return {page:h, id:null};
-      return {page:'home', id:null};
-    }
-    function onRoute() {
-      const {page,id} = getRoute();
-      PAGES.forEach(p => gi('page-'+p).classList.remove('active'));
-      gi('page-'+page).classList.add('active');
-      NAVS.forEach(p => {
-        const n=gi('nav-'+p); if(!n) return;
-        n.classList.toggle('active', page===p||(page==='post'&&p==='blog'));
-      });
-      if (page==='post'&&id) renderPost(id);
-      window.scrollTo(0,0);
-    }
-    window.addEventListener('hashchange', onRoute);
+function getRoute() {
+  const h = location.hash.slice(1);
+  if (!h || h==='home') return {page:'home', id:null};
+  if (h.startsWith('post/')) return {page:'post', id:+h.split('/')[1]};
+  if (PAGES.includes(h)) return {page:h, id:null};
+  return {page:'home', id:null};
+}
+function onRoute() {
+  const {page,id} = getRoute();
+  PAGES.forEach(p => gi('page-'+p).classList.remove('active'));
+  gi('page-'+page).classList.add('active');
+  NAVS.forEach(p => {
+    const n=gi('nav-'+p); if(!n) return;
+    n.classList.toggle('active', page===p||(page==='post'&&p==='blog'));
+  });
+  if (page==='post'&&id) renderPost(id);
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', onRoute);
 
-    // ═══ LOAD ════════════════════════════════════════════
-    async function loadAll() {
-      try {
-        const [prof,proj,exp,posts,links] = await Promise.all([
-          dbGet('profile','?select=*&limit=1'),
-          dbGet('projects','?select=*&order=display_order.asc,id.asc'),
-          dbGet('experience','?select=*&order=display_order.asc,id.asc'),
-          dbGet('posts','?select=*&order=id.desc'),
-          dbGet('links','?select=*&order=display_order.asc,id.asc'),
-        ]);
-        D.profile    = prof?.[0]||{};
-        D.projects   = proj||[];
-        D.experience = exp||[];
-        D.posts      = posts||[];
-        D.links      = links||[];
-        dbOk=true; setDbStatus(true);
-        renderAll();
-        if (adminUnlocked) renderAdminAll();
-        gi('mainWrap').style.opacity='1';
-      } catch(e) {
-        console.error(e); setDbStatus(false);
-        gi('mainWrap').style.opacity='1';
-        const msg='<p class="pg-error">Could not load — check Supabase tables exist.</p>';
-        ['homeAbout','projectsContent','experienceContent','blogContent'].forEach(id=>gi(id).innerHTML=msg);
-        showToast('Database error — see console','err');
-      }
-    }
-    function setDbStatus(ok) {
-      const dot=gi('dbDot'),lbl=gi('dbLabel');
-      if(dot) dot.className='db-dot '+(ok?'ok':'err');
-      if(lbl) {lbl.textContent=ok?'Supabase · connected':'Connection failed'; lbl.style.color=ok?'var(--adm-green)':'var(--adm-red)';}
-    }
+// ═══ LOAD ════════════════════════════════════════════
+async function loadAll() {
+  try {
+    const [prof,proj,exp,posts,links] = await Promise.all([
+      dbGet('profile','?select=*&limit=1'),
+      dbGet('projects','?select=*&order=display_order.asc,id.asc'),
+      dbGet('experience','?select=*&order=display_order.asc,id.asc'),
+      dbGet('posts','?select=*&order=id.desc'),
+      dbGet('links','?select=*&order=display_order.asc,id.asc'),
+    ]);
+    D.profile    = prof?.[0]||{};
+    D.projects   = proj||[];
+    D.experience = exp||[];
+    D.posts      = posts||[];
+    D.links      = links||[];
+    dbOk=true; setDbStatus(true);
+    renderAll();
+    if (adminUnlocked) renderAdminAll();
+  } catch(e) {
+    console.error(e); setDbStatus(false);
+    const msg='<p class="pg-error">Could not load — check Supabase tables exist.</p>';
+    ['homeAbout','projectsContent','experienceContent','blogContent'].forEach(id=>gi(id).innerHTML=msg);
+    showToast('Database error — see console','err');
+  }
+}
+function setDbStatus(ok) {
+  const dot=gi('dbDot'),lbl=gi('dbLabel');
+  if(dot) dot.className='db-dot '+(ok?'ok':'err');
+  if(lbl) {lbl.textContent=ok?'Supabase · connected':'Connection failed'; lbl.style.color=ok?'var(--adm-green)':'var(--adm-red)';}
+}
 
-    // ═══ RENDER PORTFOLIO ════════════════════════════════
-    function renderAll() {
-      const p=D.profile, name=p.name||'Portfolio';
-      document.title=name;
-      gi('hdrName').textContent=name;
-      gi('footerCopy').textContent=name+' © '+new Date().getFullYear()+(p.email?' · '+p.email:'');
-      const sn=gi('sidebarName'); if(sn) sn.textContent=name;
-      gi('homeTagline').textContent=p.tagline||'Developer / Tinkerer / Builder';
+// ═══ RENDER PORTFOLIO ════════════════════════════════
+function renderAll() {
+  const p=D.profile, name=p.name||'Portfolio';
+  document.title=name;
+  gi('hdrName').textContent=name;
+  gi('footerCopy').textContent=name+' © '+new Date().getFullYear()+(p.email?' · '+p.email:'');
+  const sn=gi('sidebarName'); if(sn) sn.textContent=name;
+  gi('homeTagline').textContent=p.tagline||'Developer / Tinkerer / Builder';
+  // photo
+  const wrap=gi('photoWrap'), ph=gi('photoPlaceholder');
+  let img=wrap.querySelector('img.home-photo');
+  if (p.photo_url) {
+    ph.style.display='none';
+    if (!img){img=document.createElement('img');img.className='home-photo';wrap.appendChild(img);}
+    img.src=p.photo_url; img.alt=name;
+  } else {
+    ph.style.display='flex';
+    if(img) img.remove();
+  }
 
-      // photo
-      const wrap=gi('photoWrap'), ph=gi('photoPlaceholder');
-      let img=wrap.querySelector('img.home-photo');
-      if (p.photo_url) {
-        ph.style.display='none';
-        if (!img){img=document.createElement('img');img.className='home-photo';wrap.appendChild(img);}
-        img.src=p.photo_url; img.alt=name;
-      } else {
-        ph.style.display='flex';
-        if(img) img.remove();
-      }
+  gi('homeAbout').innerHTML=p.about||'<p class="pg-empty">Add your bio in admin.</p>';
+  gi('homeLinks').innerHTML=D.links.map(l=>`<a href="${esc(l.url)}" target="_blank">${esc(l.label)}</a>`).join('');
 
-      gi('homeAbout').innerHTML=p.about||'<p class="pg-empty">Add your bio in admin.</p>';
-      gi('homeLinks').innerHTML=D.links.map(l=>`<a href="${esc(l.url)}" target="_blank">${esc(l.label)}</a>`).join('');
+  const pub=D.posts.filter(p=>p.status==='published');
+  if (pub.length) {
+    gi('homePostsSection').style.display='block';
+    gi('homePostsList').innerHTML=pub.slice(0,5).map(p=>`
+      <div class="home-post-row">
+        <span class="home-post-date">${esc(p.date)}</span>
+        <a class="home-post-link" href="#post/${p.id}">${esc(p.title)}</a>
+      </div>`).join('');
+  } else { gi('homePostsSection').style.display='none'; }
 
-      const pub=D.posts.filter(p=>p.status==='published');
-      if (pub.length) {
-        gi('homePostsSection').style.display='block';
-        gi('homePostsList').innerHTML=pub.slice(0,5).map(p=>`
-          <div class="home-post-row">
-            <span class="home-post-date">${esc(p.date)}</span>
-            <a class="home-post-link" href="#post/${p.id}">${esc(p.title)}</a>
-          </div>`).join('');
-      } else { gi('homePostsSection').style.display='none'; }
+  gi('projectsContent').innerHTML=D.projects.length===0?'<p class="pg-empty">No projects yet.</p>'
+    :D.projects.map(pr=>`
+      <div class="project-row">
+        <a class="project-name" href="${esc(pr.url||'')}" ${pr.url?'target="_blank"':'onclick="return false"'}>${esc(pr.name)}</a>
+        <span class="project-desc">${esc(pr.description)}</span>
+        <div class="project-tags">${(pr.tags||[]).map(t=>`<span class="ptag">${esc(t)}</span>`).join('')}</div>
+      </div>`).join('');
 
-      gi('projectsContent').innerHTML=D.projects.length===0?'<p class="pg-empty">No projects yet.</p>'
-        :D.projects.map(pr=>`
-          <div class="project-row">
-            <a class="project-name" href="${esc(pr.url||'')}" ${pr.url?'target="_blank"':'onclick="return false"'}>${esc(pr.name)}</a>
-            <span class="project-desc">${esc(pr.description)}</span>
-            <div class="project-tags">${(pr.tags||[]).map(t=>`<span class="ptag">${esc(t)}</span>`).join('')}</div>
-          </div>`).join('');
+  gi('experienceContent').innerHTML=D.experience.length===0?'<p class="pg-empty">No experience yet.</p>'
+    :D.experience.map(e=>`
+      <div class="exp-item">
+        <div class="exp-top"><span class="exp-role">${esc(e.role)}</span><span class="exp-period">${esc(e.start_period)} – ${esc(e.end_period)}</span></div>
+        <div class="exp-company">${esc(e.company)}</div>
+        <div class="exp-desc">${esc(e.description)}</div>
+      </div>`).join('');
 
-      gi('experienceContent').innerHTML=D.experience.length===0?'<p class="pg-empty">No experience yet.</p>'
-        :D.experience.map(e=>`
-          <div class="exp-item">
-            <div class="exp-top"><span class="exp-role">${esc(e.role)}</span><span class="exp-period">${esc(e.start_period)} – ${esc(e.end_period)}</span></div>
-            <div class="exp-company">${esc(e.company)}</div>
-            <div class="exp-desc">${esc(e.description)}</div>
-          </div>`).join('');
+  gi('blogContent').innerHTML=pub.length===0?'<p class="pg-empty">No posts yet.</p>'
+    :pub.map(p=>`
+      <div class="post-row">
+        <span class="post-date">${esc(p.date)}</span>
+        <a class="post-link" href="#post/${p.id}">${esc(p.title)}</a>
+      </div>`).join('');
 
-      gi('blogContent').innerHTML=pub.length===0?'<p class="pg-empty">No posts yet.</p>'
-        :pub.map(p=>`
-          <div class="post-row">
-            <span class="post-date">${esc(p.date)}</span>
-            <a class="post-link" href="#post/${p.id}">${esc(p.title)}</a>
-          </div>`).join('');
+  const {page,id}=getRoute();
+  if (page==='post'&&id) renderPost(id);
+}
 
-      const {page,id}=getRoute();
-      if (page==='post'&&id) renderPost(id);
-    }
+function renderPost(id) {
+  const p=D.posts.find(x=>x.id===id);
+  if (!p){location.hash='blog';return;}
+  gi('postPageDate').textContent=p.date;
+  gi('postPageTitle').textContent=p.title;
+  gi('postPageBody').innerHTML=p.body;
+}
 
-    function renderPost(id) {
-      const p=D.posts.find(x=>x.id===id);
-      if (!p){location.hash='blog';return;}
-      gi('postPageDate').textContent=p.date;
-      gi('postPageTitle').textContent=p.title;
-      gi('postPageBody').innerHTML=p.body;
-    }
+// ═══ ADMIN AUTH ══════════════════════════════════════
+function openAdmin() {
+  gi('adminOverlay').classList.add('open');
+  gi('adminLogin').style.display=adminUnlocked?'none':'flex';
+  gi('adminUI').style.display=adminUnlocked?'flex':'none';
+  document.body.style.overflow='hidden';
+  if (!adminUnlocked) setTimeout(()=>gi('loginPass').focus(),80);
+  else {setDbStatus(dbOk); renderAdminAll();}
+}
+function doLogin() {
+  if (gi('loginPass').value===PASS) {
+    adminUnlocked=true;
+    gi('adminLogin').style.display='none'; gi('adminUI').style.display='flex';
+    gi('loginPass').value=''; gi('loginError').textContent='';
+    setDbStatus(dbOk); renderAdminAll();
+  } else {gi('loginError').textContent='Incorrect password.'; gi('loginPass').value='';}
+}
+function closeAdmin(){gi('adminOverlay').classList.remove('open');document.body.style.overflow='';}
 
-    // ═══ ADMIN AUTH ══════════════════════════════════════
-    function openAdmin() {
-      gi('adminOverlay').classList.add('open');
-      gi('adminLogin').style.display=adminUnlocked?'none':'flex';
-      gi('adminUI').style.display=adminUnlocked?'flex':'none';
-      document.body.style.overflow='hidden';
-      if (!adminUnlocked) setTimeout(()=>gi('loginPass').focus(),80);
-      else {setDbStatus(dbOk); renderAdminAll();}
-    }
-    function doLogin() {
-      if (gi('loginPass').value===PASS) {
-        adminUnlocked=true;
-        gi('adminLogin').style.display='none'; gi('adminUI').style.display='flex';
-        gi('loginPass').value=''; gi('loginError').textContent='';
-        setDbStatus(dbOk); renderAdminAll();
-      } else {gi('loginError').textContent='Incorrect password.'; gi('loginPass').value='';}
-    }
-    function closeAdmin(){gi('adminOverlay').classList.remove('open');document.body.style.overflow='';}
+// ═══ ADMIN PANELS ════════════════════════════════════
+const PT={profile:'Profile',projects:'Projects',experience:'Experience',blog:'Blog Posts',links:'Links'};
+function showAPanel(n){
+  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+  gi('apanel-'+n).classList.add('active'); gi('abtn-'+n).classList.add('active');
+  gi('aPanelTitle').textContent=PT[n];
+}
+function renderAdminAll(){renderAProfile();renderAProjects();renderAExp();renderABlog();renderALinks();}
 
-    // ═══ ADMIN PANELS ════════════════════════════════════
-    const PT={profile:'Profile',projects:'Projects',experience:'Experience',blog:'Blog Posts',links:'Links'};
-    function showAPanel(n){
-      document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
-      document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
-      gi('apanel-'+n).classList.add('active'); gi('abtn-'+n).classList.add('active');
-      gi('aPanelTitle').textContent=PT[n];
-    }
-    function renderAdminAll(){renderAProfile();renderAProjects();renderAExp();renderABlog();renderALinks();}
+// PROFILE
+function renderAProfile(){
+  gi('pf-name').value=D.profile.name||''; gi('pf-tagline').value=D.profile.tagline||'';
+  gi('pf-email').value=D.profile.email||''; gi('pf-photo').value=D.profile.photo_url||'';
+  gi('pf-about').value=D.profile.about||''; previewPhoto();
+}
+function previewPhoto(){
+  const u=v('pf-photo'),prev=gi('photoPreview');
+  if(u){prev.src=u;prev.style.display='block';}else{prev.style.display='none';}
+}
+async function saveProfile(){
+  const btn=gi('saveProfileBtn');
+  const data={name:v('pf-name'),tagline:v('pf-tagline'),email:v('pf-email'),photo_url:v('pf-photo'),about:gi('pf-about').value.trim()};
+  setLoading(btn,true,'Saving…');
+  try {
+    if(D.profile.id) await dbPatch('profile',data,'?id=eq.'+D.profile.id);
+    else {const r=await dbPost('profile',data);D.profile.id=r?.[0]?.id;}
+    D.profile={...D.profile,...data}; renderAll(); showToast('Profile saved');
+  } catch(e){showToast('Error: '+e.message,'err');}
+  setLoading(btn,false,'Save Profile');
+}
 
-    // PROFILE
-    function renderAProfile(){
-      gi('pf-name').value=D.profile.name||''; gi('pf-tagline').value=D.profile.tagline||'';
-      gi('pf-email').value=D.profile.email||''; gi('pf-photo').value=D.profile.photo_url||'';
-      gi('pf-about').value=D.profile.about||''; previewPhoto();
-    }
-    function previewPhoto(){
-      const u=v('pf-photo'),prev=gi('photoPreview');
-      if(u){prev.src=u;prev.style.display='block';}else{prev.style.display='none';}
-    }
-    async function saveProfile(){
-      const btn=gi('saveProfileBtn');
-      const data={name:v('pf-name'),tagline:v('pf-tagline'),email:v('pf-email'),photo_url:v('pf-photo'),about:gi('pf-about').value.trim()};
-      setLoading(btn,true,'Saving…');
-      try {
-        if(D.profile.id) await dbPatch('profile',data,'?id=eq.'+D.profile.id);
-        else {const r=await dbPost('profile',data);D.profile.id=r?.[0]?.id;}
-        D.profile={...D.profile,...data}; renderAll(); showToast('Profile saved');
-      } catch(e){showToast('Error: '+e.message,'err');}
-      setLoading(btn,false,'Save Profile');
-    }
+// PROJECTS
+function renderAProjects(){
+  gi('projCount').textContent=D.projects.length+' project'+(D.projects.length!==1?'s':'');
+  gi('adminProjectsList').innerHTML=D.projects.length===0?'<div class="empty-state">No projects yet.</div>'
+    :D.projects.map((p,i)=>`
+      <div class="icard">
+        <div class="icard-info">
+          <div class="icard-title">${esc(p.name)}</div>
+          <div class="icard-sub">${esc(p.description)}</div>
+          <div class="icard-tags">${(p.tags||[]).map(t=>`<span class="icard-tag">${esc(t)}</span>`).join('')}</div>
+        </div>
+        <div class="icard-actions">
+          <button class="btn btn-ghost btn-sm" onclick="openProjectDrawer(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteProject(${i})">Delete</button>
+        </div>
+      </div>`).join('');
+}
+function openProjectDrawer(idx){
+  editProject=idx!==undefined?idx:null;
+  gi('projDrawerTitle').textContent=idx!==undefined?'Edit Project':'Add Project';
+  const p=idx!==undefined?D.projects[idx]:{};
+  gi('pd-name').value=p.name||''; gi('pd-desc').value=p.description||'';
+  gi('pd-url').value=p.url||''; gi('pd-tags').value=(p.tags||[]).join(', ');
+  gi('projectDrawer').classList.add('open');
+}
+async function saveProject(){
+  const btn=gi('saveProjectBtn');
+  const data={name:v('pd-name'),description:v('pd-desc'),url:v('pd-url'),
+    tags:v('pd-tags').split(',').map(t=>t.trim()).filter(Boolean),
+    display_order:editProject!==null?D.projects[editProject].display_order:D.projects.length};
+  if(!data.name){showToast('Name required','err');return;}
+  setLoading(btn,true,'Saving…');
+  try {
+    if(editProject!==null){await dbPatch('projects',data,'?id=eq.'+D.projects[editProject].id);D.projects[editProject]={...D.projects[editProject],...data};}
+    else{const r=await dbPost('projects',data);D.projects.push(r[0]);}
+    renderAProjects();renderAll();closeDrawer('projectDrawer');
+    showToast(editProject!==null?'Updated':'Added');editProject=null;
+  }catch(e){showToast('Error: '+e.message,'err');}
+  setLoading(btn,false,'Save');
+}
+async function deleteProject(idx){
+  if(!confirm('Delete?'))return;
+  try{await dbDelete('projects','?id=eq.'+D.projects[idx].id);D.projects.splice(idx,1);renderAProjects();renderAll();showToast('Deleted');}
+  catch(e){showToast('Error: '+e.message,'err');}
+}
 
-    // PROJECTS
-    function renderAProjects(){
-      gi('projCount').textContent=D.projects.length+' project'+(D.projects.length!==1?'s':'');
-      gi('adminProjectsList').innerHTML=D.projects.length===0?'<div class="empty-state">No projects yet.</div>'
-        :D.projects.map((p,i)=>`
-          <div class="icard">
-            <div class="icard-info">
-              <div class="icard-title">${esc(p.name)}</div>
-              <div class="icard-sub">${esc(p.description)}</div>
-              <div class="icard-tags">${(p.tags||[]).map(t=>`<span class="icard-tag">${esc(t)}</span>`).join('')}</div>
-            </div>
-            <div class="icard-actions">
-              <button class="btn btn-ghost btn-sm" onclick="openProjectDrawer(${i})">Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="deleteProject(${i})">Delete</button>
-            </div>
-          </div>`).join('');
-    }
-    function openProjectDrawer(idx){
-      editProject=idx!==undefined?idx:null;
-      gi('projDrawerTitle').textContent=idx!==undefined?'Edit Project':'Add Project';
-      const p=idx!==undefined?D.projects[idx]:{};
-      gi('pd-name').value=p.name||''; gi('pd-desc').value=p.description||'';
-      gi('pd-url').value=p.url||''; gi('pd-tags').value=(p.tags||[]).join(', ');
-      gi('projectDrawer').classList.add('open');
-    }
-    async function saveProject(){
-      const btn=gi('saveProjectBtn');
-      const data={name:v('pd-name'),description:v('pd-desc'),url:v('pd-url'),
-        tags:v('pd-tags').split(',').map(t=>t.trim()).filter(Boolean),
-        display_order:editProject!==null?D.projects[editProject].display_order:D.projects.length};
-      if(!data.name){showToast('Name required','err');return;}
-      setLoading(btn,true,'Saving…');
-      try {
-        if(editProject!==null){await dbPatch('projects',data,'?id=eq.'+D.projects[editProject].id);D.projects[editProject]={...D.projects[editProject],...data};}
-        else{const r=await dbPost('projects',data);D.projects.push(r[0]);}
-        renderAProjects();renderAll();closeDrawer('projectDrawer');
-        showToast(editProject!==null?'Updated':'Added');editProject=null;
-      }catch(e){showToast('Error: '+e.message,'err');}
-      setLoading(btn,false,'Save');
-    }
-    async function deleteProject(idx){
-      if(!confirm('Delete?'))return;
-      try{await dbDelete('projects','?id=eq.'+D.projects[idx].id);D.projects.splice(idx,1);renderAProjects();renderAll();showToast('Deleted');}
-      catch(e){showToast('Error: '+e.message,'err');}
-    }
+// EXPERIENCE
+function renderAExp(){
+  gi('expCount').textContent=D.experience.length+' position'+(D.experience.length!==1?'s':'');
+  gi('adminExpList').innerHTML=D.experience.length===0?'<div class="empty-state">No experience yet.</div>'
+    :D.experience.map((e,i)=>`
+      <div class="icard">
+        <div class="icard-info">
+          <div class="icard-title">${esc(e.role)} · ${esc(e.company)}</div>
+          <div class="icard-sub">${esc(e.start_period)} – ${esc(e.end_period)}</div>
+          <div class="icard-sub" style="margin-top:3px">${esc(e.description)}</div>
+        </div>
+        <div class="icard-actions">
+          <button class="btn btn-ghost btn-sm" onclick="openExpDrawer(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteExp(${i})">Delete</button>
+        </div>
+      </div>`).join('');
+}
+function openExpDrawer(idx){
+  editExp=idx!==undefined?idx:null;
+  gi('expDrawerTitle').textContent=idx!==undefined?'Edit Experience':'Add Experience';
+  const e=idx!==undefined?D.experience[idx]:{};
+  gi('ed-role').value=e.role||''; gi('ed-company').value=e.company||'';
+  gi('ed-start').value=e.start_period||''; gi('ed-end').value=e.end_period||''; gi('ed-desc').value=e.description||'';
+  gi('expDrawer').classList.add('open');
+}
+async function saveExp(){
+  const btn=gi('saveExpBtn');
+  const data={role:v('ed-role'),company:v('ed-company'),start_period:v('ed-start'),end_period:v('ed-end'),description:v('ed-desc'),
+    display_order:editExp!==null?D.experience[editExp].display_order:D.experience.length};
+  if(!data.role||!data.company){showToast('Role and company required','err');return;}
+  setLoading(btn,true,'Saving…');
+  try {
+    if(editExp!==null){await dbPatch('experience',data,'?id=eq.'+D.experience[editExp].id);D.experience[editExp]={...D.experience[editExp],...data};}
+    else{const r=await dbPost('experience',data);D.experience.push(r[0]);}
+    renderAExp();renderAll();closeDrawer('expDrawer');
+    showToast(editExp!==null?'Updated':'Added');editExp=null;
+  }catch(e){showToast('Error: '+e.message,'err');}
+  setLoading(btn,false,'Save');
+}
+async function deleteExp(idx){
+  if(!confirm('Delete?'))return;
+  try{await dbDelete('experience','?id=eq.'+D.experience[idx].id);D.experience.splice(idx,1);renderAExp();renderAll();showToast('Deleted');}
+  catch(e){showToast('Error: '+e.message,'err');}
+}
 
-    // EXPERIENCE
-    function renderAExp(){
-      gi('expCount').textContent=D.experience.length+' position'+(D.experience.length!==1?'s':'');
-      gi('adminExpList').innerHTML=D.experience.length===0?'<div class="empty-state">No experience yet.</div>'
-        :D.experience.map((e,i)=>`
-          <div class="icard">
-            <div class="icard-info">
-              <div class="icard-title">${esc(e.role)} · ${esc(e.company)}</div>
-              <div class="icard-sub">${esc(e.start_period)} – ${esc(e.end_period)}</div>
-              <div class="icard-sub" style="margin-top:3px">${esc(e.description)}</div>
-            </div>
-            <div class="icard-actions">
-              <button class="btn btn-ghost btn-sm" onclick="openExpDrawer(${i})">Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="deleteExp(${i})">Delete</button>
-            </div>
-          </div>`).join('');
-    }
-    function openExpDrawer(idx){
-      editExp=idx!==undefined?idx:null;
-      gi('expDrawerTitle').textContent=idx!==undefined?'Edit Experience':'Add Experience';
-      const e=idx!==undefined?D.experience[idx]:{};
-      gi('ed-role').value=e.role||''; gi('ed-company').value=e.company||'';
-      gi('ed-start').value=e.start_period||''; gi('ed-end').value=e.end_period||''; gi('ed-desc').value=e.description||'';
-      gi('expDrawer').classList.add('open');
-    }
-    async function saveExp(){
-      const btn=gi('saveExpBtn');
-      const data={role:v('ed-role'),company:v('ed-company'),start_period:v('ed-start'),end_period:v('ed-end'),description:v('ed-desc'),
-        display_order:editExp!==null?D.experience[editExp].display_order:D.experience.length};
-      if(!data.role||!data.company){showToast('Role and company required','err');return;}
-      setLoading(btn,true,'Saving…');
-      try {
-        if(editExp!==null){await dbPatch('experience',data,'?id=eq.'+D.experience[editExp].id);D.experience[editExp]={...D.experience[editExp],...data};}
-        else{const r=await dbPost('experience',data);D.experience.push(r[0]);}
-        renderAExp();renderAll();closeDrawer('expDrawer');
-        showToast(editExp!==null?'Updated':'Added');editExp=null;
-      }catch(e){showToast('Error: '+e.message,'err');}
-      setLoading(btn,false,'Save');
-    }
-    async function deleteExp(idx){
-      if(!confirm('Delete?'))return;
-      try{await dbDelete('experience','?id=eq.'+D.experience[idx].id);D.experience.splice(idx,1);renderAExp();renderAll();showToast('Deleted');}
-      catch(e){showToast('Error: '+e.message,'err');}
-    }
+// BLOG
+function renderABlog(){
+  gi('blogCount').textContent=D.posts.length+' post'+(D.posts.length!==1?'s':'');
+  gi('adminBlogList').innerHTML=D.posts.length===0?'<div class="empty-state">No posts yet.</div>'
+    :D.posts.map((p,i)=>`
+      <div class="icard">
+        <div class="icard-info">
+          <div class="icard-title">${esc(p.title)}</div>
+          <div class="icard-sub">${esc(p.date)} · <span style="color:${p.status==='published'?'var(--adm-green)':'var(--adm-muted)'}">${p.status}</span></div>
+        </div>
+        <div class="icard-actions">
+          <button class="btn btn-ghost btn-sm" onclick="openPostDrawer(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost(${i})">Delete</button>
+        </div>
+      </div>`).join('');
+}
+function openPostDrawer(idx){
+  editPost=idx!==undefined?idx:null;
+  gi('postDrawerTitle').textContent=idx!==undefined?'Edit Post':'New Post';
+  const p=idx!==undefined?D.posts[idx]:{};
+  gi('bd-title').value=p.title||''; gi('bd-date').value=p.date||'';
+  gi('bd-status').value=p.status||'published'; gi('bd-body').value=p.body||'';
+  resetImgPanel();
+  gi('postDrawer').classList.add('open');
+}
+async function savePost(){
+  const btn=gi('savePostBtn');
+  const data={title:v('bd-title'),date:v('bd-date'),status:gi('bd-status').value,body:gi('bd-body').value.trim()};
+  if(!data.title){showToast('Title required','err');return;}
+  setLoading(btn,true,'Saving…');
+  try {
+    if(editPost!==null){await dbPatch('posts',data,'?id=eq.'+D.posts[editPost].id);D.posts[editPost]={...D.posts[editPost],...data};}
+    else{const r=await dbPost('posts',data);D.posts.unshift(r[0]);}
+    renderABlog();renderAll();closeDrawer('postDrawer');
+    showToast(editPost!==null?'Updated':'Published');editPost=null;
+  }catch(e){showToast('Error: '+e.message,'err');}
+  setLoading(btn,false,'Save Post');
+}
+async function deletePost(idx){
+  if(!confirm('Delete?'))return;
+  try{await dbDelete('posts','?id=eq.'+D.posts[idx].id);D.posts.splice(idx,1);renderABlog();renderAll();showToast('Deleted');}
+  catch(e){showToast('Error: '+e.message,'err');}
+}
 
-    // BLOG
-    function renderABlog(){
-      gi('blogCount').textContent=D.posts.length+' post'+(D.posts.length!==1?'s':'');
-      gi('adminBlogList').innerHTML=D.posts.length===0?'<div class="empty-state">No posts yet.</div>'
-        :D.posts.map((p,i)=>`
-          <div class="icard">
-            <div class="icard-info">
-              <div class="icard-title">${esc(p.title)}</div>
-              <div class="icard-sub">${esc(p.date)} · <span style="color:${p.status==='published'?'var(--adm-green)':'var(--adm-muted)'}">${p.status}</span></div>
-            </div>
-            <div class="icard-actions">
-              <button class="btn btn-ghost btn-sm" onclick="openPostDrawer(${i})">Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="deletePost(${i})">Delete</button>
-            </div>
-          </div>`).join('');
-    }
-    function openPostDrawer(idx){
-      editPost=idx!==undefined?idx:null;
-      gi('postDrawerTitle').textContent=idx!==undefined?'Edit Post':'New Post';
-      const p=idx!==undefined?D.posts[idx]:{};
-      gi('bd-title').value=p.title||''; gi('bd-date').value=p.date||'';
-      gi('bd-status').value=p.status||'published'; gi('bd-body').value=p.body||'';
-      resetImgPanel();
-      gi('postDrawer').classList.add('open');
-    }
-    async function savePost(){
-      const btn=gi('savePostBtn');
-      const data={title:v('bd-title'),date:v('bd-date'),status:gi('bd-status').value,body:gi('bd-body').value.trim()};
-      if(!data.title){showToast('Title required','err');return;}
-      setLoading(btn,true,'Saving…');
-      try {
-        if(editPost!==null){await dbPatch('posts',data,'?id=eq.'+D.posts[editPost].id);D.posts[editPost]={...D.posts[editPost],...data};}
-        else{const r=await dbPost('posts',data);D.posts.unshift(r[0]);}
-        renderABlog();renderAll();closeDrawer('postDrawer');
-        showToast(editPost!==null?'Updated':'Published');editPost=null;
-      }catch(e){showToast('Error: '+e.message,'err');}
-      setLoading(btn,false,'Save Post');
-    }
-    async function deletePost(idx){
-      if(!confirm('Delete?'))return;
-      try{await dbDelete('posts','?id=eq.'+D.posts[idx].id);D.posts.splice(idx,1);renderABlog();renderAll();showToast('Deleted');}
-      catch(e){showToast('Error: '+e.message,'err');}
-    }
+// LINKS
+function renderALinks(){
+  gi('linksEditor').innerHTML=D.links.map((l,i)=>`
+    <div style="display:flex;gap:9px;margin-bottom:9px;align-items:center">
+      <input class="finput" style="width:110px" value="${esc(l.label)}" id="lk-l-${i}" placeholder="github">
+      <input class="finput" style="flex:1" value="${esc(l.url)}" id="lk-u-${i}" placeholder="https://...">
+      <button class="btn btn-danger btn-sm" onclick="removeLinkRow(${i})">✕</button>
+    </div>`).join('');
+}
+function addLinkRow(){D.links.push({label:'',url:''});renderALinks();}
+function removeLinkRow(i){D.links.splice(i,1);renderALinks();}
+async function saveLinks(){
+  const updated=D.links.map((l,i)=>({...l,
+    label:(gi('lk-l-'+i)||{value:l.label}).value.trim(),
+    url:(gi('lk-u-'+i)||{value:l.url}).value.trim()
+  })).filter(l=>l.label&&l.url);
+  try {
+    if(D.links.some(l=>l.id)) await dbDelete('links','?id=gt.0');
+    const rows=await Promise.all(updated.map((l,i)=>dbPost('links',{label:l.label,url:l.url,display_order:i})));
+    D.links=rows.map(r=>r[0]);
+    renderAll();renderALinks();showToast('Links saved');
+  }catch(e){showToast('Error: '+e.message,'err');}
+}
 
-    // LINKS
-    function renderALinks(){
-      gi('linksEditor').innerHTML=D.links.map((l,i)=>`
-        <div style="display:flex;gap:9px;margin-bottom:9px;align-items:center">
-          <input class="finput" style="width:110px" value="${esc(l.label)}" id="lk-l-${i}" placeholder="github">
-          <input class="finput" style="flex:1" value="${esc(l.url)}" id="lk-u-${i}" placeholder="https://...">
-          <button class="btn btn-danger btn-sm" onclick="removeLinkRow(${i})">✕</button>
-        </div>`).join('');
-    }
-    function addLinkRow(){D.links.push({label:'',url:''});renderALinks();}
-    function removeLinkRow(i){D.links.splice(i,1);renderALinks();}
-    async function saveLinks(){
-      const updated=D.links.map((l,i)=>({...l,
-        label:(gi('lk-l-'+i)||{value:l.label}).value.trim(),
-        url:(gi('lk-u-'+i)||{value:l.url}).value.trim()
-      })).filter(l=>l.label&&l.url);
-      try {
-        if(D.links.some(l=>l.id)) await dbDelete('links','?id=gt.0');
-        const rows=await Promise.all(updated.map((l,i)=>dbPost('links',{label:l.label,url:l.url,display_order:i})));
-        D.links=rows.map(r=>r[0]);
-        renderAll();renderALinks();showToast('Links saved');
-      }catch(e){showToast('Error: '+e.message,'err');}
-    }
+// ═══ EDITOR — TOOLBAR ════════════════════════════════
+function wrapSel(id, before, after) {
+  // before/after are HTML-entity-encoded in the onclick, decode them back
+  const b = before.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+  const a = after.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+  const ta=gi(id), s=ta.selectionStart, e=ta.selectionEnd;
+  const sel=ta.value.substring(s,e)||'text';
+  ta.value=ta.value.substring(0,s)+b+sel+a+ta.value.substring(e);
+  ta.focus(); ta.selectionStart=s+b.length; ta.selectionEnd=s+b.length+sel.length;
+}
+function doInsertLink(){
+  const url=prompt('URL:'); if(!url) return;
+  const ta=gi('bd-body'),s=ta.selectionStart,e=ta.selectionEnd;
+  const lbl=ta.value.substring(s,e)||'link text';
+  const html='<a href="'+url+'">'+lbl+'</a>';
+  ta.value=ta.value.substring(0,s)+html+ta.value.substring(e);
+  ta.focus();
+}
+function insertAtCursor(html){
+  const ta=gi('bd-body'), pos=ta.selectionStart;
+  ta.value=ta.value.substring(0,pos)+html+ta.value.substring(pos);
+  ta.focus(); ta.selectionStart=ta.selectionEnd=pos+html.length;
+}
 
-    // ═══ EDITOR — TOOLBAR ════════════════════════════════
-    function wrapSel(id, before, after) {
-      // before/after are HTML-entity-encoded in the onclick, decode them back
-      const b = before.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
-      const a = after.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
-      const ta=gi(id), s=ta.selectionStart, e=ta.selectionEnd;
-      const sel=ta.value.substring(s,e)||'text';
-      ta.value=ta.value.substring(0,s)+b+sel+a+ta.value.substring(e);
-      ta.focus(); ta.selectionStart=s+b.length; ta.selectionEnd=s+b.length+sel.length;
-    }
-    function doInsertLink(){
-      const url=prompt('URL:'); if(!url) return;
-      const ta=gi('bd-body'),s=ta.selectionStart,e=ta.selectionEnd;
-      const lbl=ta.value.substring(s,e)||'link text';
-      const html='<a href="'+url+'">'+lbl+'</a>';
-      ta.value=ta.value.substring(0,s)+html+ta.value.substring(e);
-      ta.focus();
-    }
-    function insertAtCursor(html){
-      const ta=gi('bd-body'), pos=ta.selectionStart;
-      ta.value=ta.value.substring(0,pos)+html+ta.value.substring(pos);
-      ta.focus(); ta.selectionStart=ta.selectionEnd=pos+html.length;
-    }
+// ═══ EDITOR — IMAGE PANEL ════════════════════════════
+let _uploadedUrl='';
 
-    // ═══ EDITOR — IMAGE PANEL ════════════════════════════
-    let _uploadedUrl='';
+function toggleImgPanel(){
+  const p=gi('imgPanel'), btn=gi('imgToggleBtn');
+  const show=p.style.display==='none';
+  p.style.display=show?'block':'none';
+  btn.classList.toggle('tbtn-active', show);
+}
+function resetImgPanel(){
+  gi('imgPanel').style.display='none';
+  gi('imgToggleBtn').classList.remove('tbtn-active');
+  gi('uploadPreview').style.display='none';
+  gi('uploadStatus').textContent='';
+  gi('uploadCaption').value='';
+  gi('urlInput').value='';
+  gi('urlPreview').style.display='none';
+  gi('urlStatus').textContent='';
+  gi('urlCaption').value='';
+  gi('uploadProgress').style.display='none';
+  gi('uploadBar').style.width='0%';
+  gi('fileInput').value='';
+  _uploadedUrl='';
+  switchImgTab('upload');
+}
+function switchImgTab(tab){
+  ['upload','url'].forEach(t=>{
+    gi('tab-'+t).classList.toggle('active',t===tab);
+    gi('pane-'+t).classList.toggle('active',t===tab);
+  });
+}
 
-    function toggleImgPanel(){
-      const p=gi('imgPanel'), btn=gi('imgToggleBtn');
-      const show=p.style.display==='none';
-      p.style.display=show?'block':'none';
-      btn.classList.toggle('tbtn-active', show);
-    }
-    function resetImgPanel(){
-      gi('imgPanel').style.display='none';
-      gi('imgToggleBtn').classList.remove('tbtn-active');
-      gi('uploadPreview').style.display='none';
-      gi('uploadStatus').textContent='';
-      gi('uploadCaption').value='';
-      gi('urlInput').value='';
-      gi('urlPreview').style.display='none';
-      gi('urlStatus').textContent='';
-      gi('urlCaption').value='';
-      gi('uploadProgress').style.display='none';
-      gi('uploadBar').style.width='0%';
-      gi('fileInput').value='';
-      _uploadedUrl='';
-      switchImgTab('upload');
-    }
-    function switchImgTab(tab){
-      ['upload','url'].forEach(t=>{
-        gi('tab-'+t).classList.toggle('active',t===tab);
-        gi('pane-'+t).classList.toggle('active',t===tab);
-      });
-    }
+// File handling — FileReader base64, no storage bucket needed
+function onDrop(e){
+  e.preventDefault(); gi('dropZone').classList.remove('over');
+  const f=e.dataTransfer.files[0]; if(f) onFileChosen(f);
+}
+function onFileChosen(file){
+  if(!file||!file.type.startsWith('image/')){setStatus('upload','Not an image file','err');return;}
+  if(file.size>8*1024*1024){setStatus('upload','Max 8 MB exceeded','err');return;}
+  readAsBase64(file);
+}
+function readAsBase64(file){
+  setStatus('upload','Reading…','');
+  gi('uploadProgress').style.display='block';
+  gi('uploadBar').style.width='0%';
+  gi('uploadPreview').style.display='none';
+  const reader=new FileReader();
+  reader.onprogress=e=>{if(e.lengthComputable)gi('uploadBar').style.width=Math.round(e.loaded/e.total*90)+'%';};
+  reader.onerror=()=>{gi('uploadProgress').style.display='none';setStatus('upload','Failed to read file','err');};
+  reader.onload=e=>{
+    gi('uploadBar').style.width='100%';
+    setTimeout(()=>gi('uploadProgress').style.display='none',300);
+    _uploadedUrl=e.target.result;
+    gi('uploadThumb').src=_uploadedUrl;
+    gi('uploadUrl').textContent=file.name+' ('+Math.round(file.size/1024)+' KB)';
+    gi('uploadPreview').style.display='block';
+    setStatus('upload','Ready to insert ✓','ok');
+  };
+  reader.readAsDataURL(file);
+}
+function insertFromUpload(){
+  if(!_uploadedUrl){setStatus('upload','No image selected yet','err');return;}
+  doInsertImg(_uploadedUrl, gi('uploadCaption').value.trim());
+  setStatus('upload','Inserted ✓','ok');
+  setTimeout(()=>{gi('imgPanel').style.display='none';gi('imgToggleBtn').classList.remove('tbtn-active');},500);
+}
 
-    // File handling — FileReader base64, no storage bucket needed
-    function onDrop(e){
-      e.preventDefault(); gi('dropZone').classList.remove('over');
-      const f=e.dataTransfer.files[0]; if(f) onFileChosen(f);
-    }
-    function onFileChosen(file){
-      if(!file||!file.type.startsWith('image/')){setStatus('upload','Not an image file','err');return;}
-      if(file.size>8*1024*1024){setStatus('upload','Max 8 MB exceeded','err');return;}
-      readAsBase64(file);
-    }
-    function readAsBase64(file){
-      setStatus('upload','Reading…','');
-      gi('uploadProgress').style.display='block';
-      gi('uploadBar').style.width='0%';
-      gi('uploadPreview').style.display='none';
-      const reader=new FileReader();
-      reader.onprogress=e=>{if(e.lengthComputable)gi('uploadBar').style.width=Math.round(e.loaded/e.total*90)+'%';};
-      reader.onerror=()=>{gi('uploadProgress').style.display='none';setStatus('upload','Failed to read file','err');};
-      reader.onload=e=>{
-        gi('uploadBar').style.width='100%';
-        setTimeout(()=>gi('uploadProgress').style.display='none',300);
-        _uploadedUrl=e.target.result;
-        gi('uploadThumb').src=_uploadedUrl;
-        gi('uploadUrl').textContent=file.name+' ('+Math.round(file.size/1024)+' KB)';
-        gi('uploadPreview').style.display='block';
-        setStatus('upload','Ready to insert ✓','ok');
-      };
-      reader.readAsDataURL(file);
-    }
-    function insertFromUpload(){
-      if(!_uploadedUrl){setStatus('upload','No image selected yet','err');return;}
-      doInsertImg(_uploadedUrl, gi('uploadCaption').value.trim());
-      setStatus('upload','Inserted ✓','ok');
-      setTimeout(()=>{gi('imgPanel').style.display='none';gi('imgToggleBtn').classList.remove('tbtn-active');},500);
-    }
+// URL tab
+function previewUrlImg(){
+  const url=gi('urlInput').value.trim(), prev=gi('urlPreview');
+  if(url){gi('urlThumb').src=url;gi('urlDisplay').textContent=url;prev.style.display='flex';}
+  else{prev.style.display='none';}
+}
+function insertFromUrl(){
+  const url=gi('urlInput').value.trim();
+  if(!url){setStatus('url','Please enter a URL','err');return;}
+  doInsertImg(url, gi('urlCaption').value.trim());
+  setStatus('url','Inserted ✓','ok');
+  setTimeout(()=>{gi('imgPanel').style.display='none';gi('imgToggleBtn').classList.remove('tbtn-active');},600);
+}
 
-    // URL tab
-    function previewUrlImg(){
-      const url=gi('urlInput').value.trim(), prev=gi('urlPreview');
-      if(url){gi('urlThumb').src=url;gi('urlDisplay').textContent=url;prev.style.display='flex';}
-      else{prev.style.display='none';}
-    }
-    function insertFromUrl(){
-      const url=gi('urlInput').value.trim();
-      if(!url){setStatus('url','Please enter a URL','err');return;}
-      doInsertImg(url, gi('urlCaption').value.trim());
-      setStatus('url','Inserted ✓','ok');
-      setTimeout(()=>{gi('imgPanel').style.display='none';gi('imgToggleBtn').classList.remove('tbtn-active');},600);
-    }
+function doInsertImg(url, caption){
+  const img='<img src="'+url+'" alt="'+(caption||'')+'" style="max-width:100%">';
+  const html=caption?'\n<figure>\n  '+img+'\n  <figcaption>'+caption+'</figcaption>\n</figure>\n':'\n'+img+'\n';
+  insertAtCursor(html);
+}
+function setStatus(tab, msg, type){
+  const el=gi(tab==='upload'?'uploadStatus':'urlStatus');
+  el.textContent=msg; el.className='img-status'+(type?' '+type:'');
+}
 
-    function doInsertImg(url, caption){
-      const img='<img src="'+url+'" alt="'+(caption||'')+'" style="max-width:100%">';
-      const html=caption?'\n<figure>\n  '+img+'\n  <figcaption>'+caption+'</figcaption>\n</figure>\n':'\n'+img+'\n';
-      insertAtCursor(html);
-    }
-    function setStatus(tab, msg, type){
-      const el=gi(tab==='upload'?'uploadStatus':'urlStatus');
-      el.textContent=msg; el.className='img-status'+(type?' '+type:'');
-    }
+// ═══ UTILS ═══════════════════════════════════════════
+function gi(id){return document.getElementById(id);}
+function v(id){return gi(id).value.trim();}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function setLoading(btn,on,label){btn.disabled=on;btn.textContent=label;}
+function closeDrawer(id){gi(id).classList.remove('open');}
+document.querySelectorAll('.drawer-overlay').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.classList.remove('open');}));
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  const od=document.querySelector('.drawer-overlay.open');
+  if(od){od.classList.remove('open');return;}
+  if(gi('adminOverlay').classList.contains('open')){closeAdmin();return;}
+});
+let _tt;
+function showToast(msg,type='ok'){
+  const ex=document.querySelector('.toast');if(ex)ex.remove();clearTimeout(_tt);
+  const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;
+  document.body.appendChild(t);_tt=setTimeout(()=>t.remove(),3000);
+}
 
-    // ═══ UTILS ═══════════════════════════════════════════
-    function gi(id){return document.getElementById(id);}
-    function v(id){return gi(id).value.trim();}
-    function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-    function setLoading(btn,on,label){btn.disabled=on;btn.textContent=label;}
-    function closeDrawer(id){gi(id).classList.remove('open');}
-    document.querySelectorAll('.drawer-overlay').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.classList.remove('open');}));
-    document.addEventListener('keydown',e=>{
-      if(e.key!=='Escape')return;
-      const od=document.querySelector('.drawer-overlay.open');
-      if(od){od.classList.remove('open');return;}
-      if(gi('adminOverlay').classList.contains('open')){closeAdmin();return;}
-    });
-    let _tt;
-    function showToast(msg,type='ok'){
-      const ex=document.querySelector('.toast');if(ex)ex.remove();clearTimeout(_tt);
-      const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;
-      document.body.appendChild(t);_tt=setTimeout(()=>t.remove(),3000);
-    }
-
-    // ═══ BOOT ════════════════════════════════════════════
-    onRoute();
-    loadAll().then(()=>onRoute());
+// ═══ BOOT ════════════════════════════════════════════
+onRoute();
+loadAll().then(()=>onRoute());
 </script>
 </body>
 </html>
