@@ -222,38 +222,6 @@ body{background:var(--bg);color:var(--fg);font-family:'EB Garamond',Georgia,seri
 /* skeleton shimmer for loading state */
 .skel{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;border-radius:3px;display:inline-block}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-/* === MOBILE FIXES === */
-@media (max-width: 600px) {
-  .home-body {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-
-  .home-photo,
-  .home-photo-placeholder {
-    width: 140px !important;
-    height: 140px !important;
-    margin: 0 auto !important;
-  }
-
-  #site-header {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 12px !important;
-  }
-
-  .site-nav {
-    justify-content: center !important;
-    flex-wrap: wrap !important;
-  }
-
-  .wrap {
-    padding: 0 16px !important;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -586,10 +554,13 @@ function onRoute() {
 window.addEventListener('hashchange', onRoute);
 
 // ═══ LOAD ════════════════════════════════════════════
-async function loadAll() {
-  // 6 second timeout — if Supabase doesn't respond, clear skeletons gracefully
-  const timeout = new Promise((_,reject) => setTimeout(()=>reject(new Error('timeout')), 6000));
+async function loadAll(attempt=1) {
+  const timeout = new Promise((_,reject) => setTimeout(()=>reject(new Error('Timed out after 12s — Supabase URL: '+SB_URL)), 12000));
   try {
+    // Test connection first with a simple ping
+    const pingRes = await fetch(SB_URL+'/rest/v1/profile?select=id&limit=1', {headers:SBH});
+    if (!pingRes.ok) throw new Error('HTTP '+pingRes.status+' on profile table — '+await pingRes.text());
+    
     const [prof,proj,exp,posts,links] = await Promise.race([
       Promise.all([
         dbGet('profile','?select=*&limit=1'),
@@ -609,12 +580,19 @@ async function loadAll() {
     renderAll();
     if (adminUnlocked) renderAdminAll();
   } catch(e) {
-    console.error('Load failed:', e.message);
+    console.error('Load failed (attempt '+attempt+'):', e.message);
+    if (attempt < 3) {
+      setTimeout(()=>loadAll(attempt+1), 2000);
+      return;
+    }
     setDbStatus(false);
     clearSkeletons();
-    if (e.message === 'timeout') {
-      showToast('Database is slow — try refreshing', 'err');
-    }
+    // Show the actual error on screen so we can diagnose
+    gi('homeAbout').innerHTML = `<div style="font-family:monospace;font-size:.8rem;color:#c00;background:#fff5f5;border:1px solid #fcc;padding:16px;border-radius:4px;line-height:1.8">
+      <strong>Database error (attempt ${attempt}):</strong><br>
+      ${e.message}<br><br>
+      <span style="color:#666">Check browser console for details.</span>
+    </div>`;
   }
 }
 
