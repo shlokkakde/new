@@ -220,21 +220,39 @@ body{background:var(--bg);color:var(--fg);font-family:'EB Garamond',Georgia,seri
 
 /* ── RESPONSIVE ──────────────────────────────── */
 @media(max-width:700px){
-  .wrap{padding:0 20px}
-  #site-header{padding:24px 0 20px}
-  .site-name{font-size:1.5rem}
-  .site-nav{display:none}      /* hide desktop nav on mobile */
-  .hamburger{display:flex}     /* show hamburger on mobile */
-  .home-body{grid-template-columns:1fr}
-  .home-photo-wrap{order:-1}
-  .home-photo,.home-photo-placeholder{width:120px;height:120px}
-  .home-tagline{font-size:1.55rem;margin-bottom:28px}
+  .wrap{padding:0 22px}
+
+  /* Stack header, center everything like nadh.in */
+  #site-header{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding:36px 0 22px;
+    gap:16px;
+  }
+  .site-name{font-size:2.4rem}
+
+  /* Nav just wraps centered — no hamburger needed */
+  .site-nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+  .site-nav a{font-size:1.05rem}
+  .hamburger{display:none!important}
+  .mobile-nav{display:none!important}
+
+  /* Single column, photo centered at top */
+  .home-body{grid-template-columns:1fr;gap:28px}
+  .home-photo-wrap{order:-1;justify-content:center}
+  .home-photo,.home-photo-placeholder{width:220px;height:220px}
+  .home-tagline{font-size:1.9rem;text-align:center;margin-bottom:28px}
+  .home-text p{font-size:1.05rem}
+  .home-links{justify-content:center}
+
   .project-row{grid-template-columns:1fr;gap:4px}
   .project-tags{justify-content:flex-start}
+  .page-title{font-size:1.5rem}
+  .page{padding:32px 0 72px}
   .admin-sidebar{display:none}
   .frow{grid-template-columns:1fr}
   .drawer{width:100%}
-  .page{padding:32px 0 72px}
 }
 </style>
 </head>
